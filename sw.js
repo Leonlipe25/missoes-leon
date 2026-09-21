@@ -1,4 +1,4 @@
-const CACHE = 'missoes-v1';
+const CACHE = 'missoes-v2';
 const PRECACHE = ['./', './index.html', './icon.svg', './manifest.json'];
 
 self.addEventListener('install', e => {

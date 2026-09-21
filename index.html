@@ -78,6 +78,45 @@ body{
 .login-name{font-size:1.1rem;font-weight:700}
 .login-role{font-size:.75rem;color:var(--text-m);font-weight:500;margin-top:2px}
 
+/* ── PIN SCREEN ── */
+.pin-screen{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:20px;padding:40px 16px;
+}
+.pin-back{
+  font-family:inherit;font-size:.85rem;color:var(--text-m);
+  background:none;border:none;cursor:pointer;font-weight:600;
+  display:flex;align-items:center;gap:4px;
+}
+.pin-back:hover{color:var(--primary)}
+.pin-user{text-align:center}
+.pin-user .login-avatar{margin:0 auto 8px;width:64px;height:64px;font-size:2rem}
+.pin-user-name{font-size:1.2rem;font-weight:700}
+.pin-label{font-size:.85rem;color:var(--text-m);font-weight:500;text-align:center;margin-top:-8px}
+.pin-dots{display:flex;gap:12px;justify-content:center}
+.pin-dot{
+  width:18px;height:18px;border-radius:50%;
+  border:2px solid var(--border);background:var(--surface);
+  transition:all .2s;
+}
+.pin-dot.filled{background:var(--primary);border-color:var(--primary)}
+.pin-dot.error{background:#ef4444;border-color:#ef4444;animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.pin-pad{display:grid;grid-template-columns:repeat(3,72px);gap:10px;justify-content:center}
+.pin-key{
+  width:72px;height:56px;border:1px solid var(--border);border-radius:14px;
+  background:var(--surface);color:var(--text);font-family:inherit;
+  font-size:1.3rem;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .1s;box-shadow:var(--sh);
+}
+.pin-key:active{transform:scale(.93);background:var(--primary-bg)}
+.pin-key.empty{visibility:hidden}
+.pin-key.del{font-size:1rem;color:var(--text-m)}
+.pin-error{font-size:.78rem;color:#ef4444;font-weight:600;min-height:20px;text-align:center}
+.pin-confirm-row{display:flex;gap:10px;width:100%;max-width:240px}
+.pin-confirm-row .btn{font-size:.85rem;padding:10px}
+
 /* ── HEADER ── */
 .header{text-align:center;padding:20px 0 4px;position:relative}
 .header h1{font-size:1.5rem;font-weight:700;margin:0;color:var(--primary);letter-spacing:.02em}
@@ -257,6 +296,37 @@ body{
   </div>
 </div>
 
+<!-- ══════ PIN SCREEN ══════ -->
+<div id="pinScreen" hidden>
+  <div class="pin-screen">
+    <button class="pin-back" id="pinBack">← Voltar</button>
+    <div class="pin-user">
+      <div class="login-avatar" id="pinAvatar"></div>
+      <div class="pin-user-name" id="pinUserName"></div>
+    </div>
+    <div class="pin-label" id="pinLabel">Digite sua senha</div>
+    <div class="pin-dots" id="pinDots">
+      <div class="pin-dot"></div><div class="pin-dot"></div>
+      <div class="pin-dot"></div><div class="pin-dot"></div>
+    </div>
+    <div class="pin-error" id="pinError"></div>
+    <div class="pin-pad">
+      <button class="pin-key" data-key="1">1</button>
+      <button class="pin-key" data-key="2">2</button>
+      <button class="pin-key" data-key="3">3</button>
+      <button class="pin-key" data-key="4">4</button>
+      <button class="pin-key" data-key="5">5</button>
+      <button class="pin-key" data-key="6">6</button>
+      <button class="pin-key" data-key="7">7</button>
+      <button class="pin-key" data-key="8">8</button>
+      <button class="pin-key" data-key="9">9</button>
+      <button class="pin-key empty"></button>
+      <button class="pin-key" data-key="0">0</button>
+      <button class="pin-key del" data-key="del">⌫</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══════ APP ══════ -->
 <div id="app" hidden>
   <header class="header">
@@ -333,7 +403,7 @@ const FIREBASE_CONFIG = {
 };
 
 // ──────────────────────────────────────────────
-// 👤 USERS
+// 👤 USERS & PIN
 // ──────────────────────────────────────────────
 const USERS = {
   leon:   { name: 'Leon',   emoji: '🦁', role: 'child',  bgClass: 'leon' },
@@ -341,7 +411,45 @@ const USERS = {
   mayara: { name: 'Mayara', emoji: '👩', role: 'parent', bgClass: 'mae' },
 };
 
-let currentUser = null; // { id, name, emoji, role }
+let currentUser = null;
+let userPins = {}; // { leon: '1234', felipe: '5678', ... }
+let pinBuffer = '';
+let pinMode = ''; // 'login', 'create', 'confirm'
+let pinCreating = ''; // temp PIN during creation
+let selectedUserId = '';
+
+function loadPins() {
+  try {
+    const raw = localStorage.getItem('missoes_pins');
+    if (raw) userPins = JSON.parse(raw);
+  } catch(e) {}
+}
+
+function savePins() {
+  try { localStorage.setItem('missoes_pins', JSON.stringify(userPins)); } catch(e) {}
+  // Also save to Firebase if available
+  if (isOnline && db && window._fb) {
+    const fb = window._fb;
+    fb.setDoc(fb.doc(db, 'state', 'pins'), userPins).catch(() => {});
+  }
+}
+
+async function loadPinsFromFirebase() {
+  if (!db || !window._fb) return;
+  try {
+    const fb = window._fb;
+    const snap = await fb.getDoc(fb.doc(db, 'state', 'pins'));
+    if (snap.exists()) {
+      const remotePins = snap.data();
+      // Merge: remote wins if local doesn't have it
+      for (const uid of Object.keys(USERS)) {
+        if (remotePins[uid] && !userPins[uid]) userPins[uid] = remotePins[uid];
+        else if (remotePins[uid]) userPins[uid] = remotePins[uid]; // remote always wins
+      }
+      savePins(); // sync back to localStorage
+    }
+  } catch(e) {}
+}
 
 function loadUser() {
   try {
@@ -367,6 +475,116 @@ function clearUser() {
 function isParent() {
   return currentUser?.role === 'parent';
 }
+
+// ──────────────────────────────────────────────
+// 🔢 PIN PAD LOGIC
+// ──────────────────────────────────────────────
+function showPinScreen(userId) {
+  selectedUserId = userId;
+  pinBuffer = '';
+  pinCreating = '';
+  const user = USERS[userId];
+
+  document.getElementById('loginScreen').hidden = true;
+  document.getElementById('pinScreen').hidden = false;
+
+  const avatar = document.getElementById('pinAvatar');
+  avatar.textContent = user.emoji;
+  avatar.className = `login-avatar ${user.bgClass}`;
+  document.getElementById('pinUserName').textContent = user.name;
+  document.getElementById('pinError').textContent = '';
+
+  if (userPins[userId]) {
+    pinMode = 'login';
+    document.getElementById('pinLabel').textContent = 'Digite sua senha';
+  } else {
+    pinMode = 'create';
+    document.getElementById('pinLabel').textContent = 'Crie sua senha (4 dígitos)';
+  }
+  updatePinDots();
+}
+
+function updatePinDots() {
+  const dots = document.querySelectorAll('#pinDots .pin-dot');
+  dots.forEach((dot, i) => {
+    dot.className = 'pin-dot' + (i < pinBuffer.length ? ' filled' : '');
+  });
+}
+
+function shakeAndClear() {
+  const dots = document.querySelectorAll('#pinDots .pin-dot');
+  dots.forEach(d => d.classList.add('error'));
+  setTimeout(() => {
+    pinBuffer = '';
+    dots.forEach(d => d.classList.remove('error'));
+    updatePinDots();
+  }, 500);
+}
+
+function handlePinKey(key) {
+  if (key === 'del') {
+    pinBuffer = pinBuffer.slice(0, -1);
+    updatePinDots();
+    document.getElementById('pinError').textContent = '';
+    return;
+  }
+
+  if (pinBuffer.length >= 4) return;
+  pinBuffer += key;
+  updatePinDots();
+
+  if (pinBuffer.length === 4) {
+    setTimeout(() => processPinComplete(), 150);
+  }
+}
+
+function processPinComplete() {
+  if (pinMode === 'login') {
+    if (pinBuffer === userPins[selectedUserId]) {
+      // Correct!
+      saveUser(selectedUserId);
+      document.getElementById('pinScreen').hidden = true;
+      showApp();
+    } else {
+      document.getElementById('pinError').textContent = 'Senha incorreta';
+      shakeAndClear();
+    }
+  } else if (pinMode === 'create') {
+    pinCreating = pinBuffer;
+    pinBuffer = '';
+    pinMode = 'confirm';
+    document.getElementById('pinLabel').textContent = 'Confirme sua senha';
+    document.getElementById('pinError').textContent = '';
+    updatePinDots();
+  } else if (pinMode === 'confirm') {
+    if (pinBuffer === pinCreating) {
+      // PIN created!
+      userPins[selectedUserId] = pinBuffer;
+      savePins();
+      saveUser(selectedUserId);
+      document.getElementById('pinScreen').hidden = true;
+      showApp();
+    } else {
+      document.getElementById('pinError').textContent = 'Senhas não conferem. Tente de novo.';
+      pinMode = 'create';
+      document.getElementById('pinLabel').textContent = 'Crie sua senha (4 dígitos)';
+      pinCreating = '';
+      shakeAndClear();
+    }
+  }
+}
+
+// PIN pad events
+document.querySelectorAll('.pin-key[data-key]').forEach(btn => {
+  btn.addEventListener('click', () => handlePinKey(btn.dataset.key));
+});
+
+document.getElementById('pinBack').addEventListener('click', () => {
+  document.getElementById('pinScreen').hidden = true;
+  document.getElementById('loginScreen').hidden = false;
+  pinBuffer = '';
+  pinCreating = '';
+});
 
 // ──────────────────────────────────────────────
 // 📋 DEFINIÇÃO DAS TAREFAS
@@ -839,14 +1057,14 @@ document.getElementById('resetBtn').addEventListener('click', async () => {
 document.querySelectorAll('.login-card').forEach(card => {
   card.addEventListener('click', () => {
     const userId = card.dataset.user;
-    saveUser(userId);
-    showApp();
+    showPinScreen(userId);
   });
 });
 
 document.getElementById('logoutBtn').addEventListener('click', () => {
   clearUser();
   document.getElementById('app').hidden = true;
+  document.getElementById('pinScreen').hidden = true;
   document.getElementById('loginScreen').hidden = false;
 });
 
@@ -860,13 +1078,17 @@ function showApp() {
 // 🚀 INIT
 // ──────────────────────────────────────────────
 async function boot() {
+  loadPins();
   const fbOk = await initFirebase();
-  if (!fbOk) {
+  if (fbOk) {
+    await loadPinsFromFirebase();
+  } else {
     lsLoad();
   }
   document.getElementById('loadingScreen').hidden = true;
 
   if (loadUser()) {
+    // User was logged in before — go straight to app
     showApp();
   } else {
     document.getElementById('loginScreen').hidden = false;
