@@ -52,13 +52,65 @@ body{
   max-width:480px; margin:0 auto; min-height:100%;
 }
 
-.header{text-align:center;padding:20px 0 4px}
+/* ── LOGIN SCREEN ── */
+.login-screen{
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:24px; padding:40px 16px;
+}
+.login-title{font-size:1.8rem;font-weight:700;color:var(--primary);text-align:center}
+.login-sub{font-size:.9rem;color:var(--text-m);text-align:center;margin-top:-12px;font-weight:500}
+.login-cards{display:flex;flex-direction:column;gap:12px;width:100%;max-width:320px}
+.login-card{
+  display:flex;align-items:center;gap:16px;
+  background:var(--surface);border:2px solid var(--border);border-radius:16px;
+  padding:16px 20px;cursor:pointer;transition:all .2s;box-shadow:var(--sh);
+}
+.login-card:hover{border-color:var(--primary);box-shadow:var(--sh-lg)}
+.login-card:active{transform:scale(.97)}
+.login-avatar{
+  width:52px;height:52px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  flex-shrink:0;
+}
+.login-avatar.leon{background:var(--primary-bg)}
+.login-avatar.pai{background:var(--success-bg)}
+.login-avatar.mae{background:var(--reward-bg)}
+.login-name{font-size:1.1rem;font-weight:700}
+.login-role{font-size:.75rem;color:var(--text-m);font-weight:500;margin-top:2px}
+
+/* ── HEADER ── */
+.header{text-align:center;padding:20px 0 4px;position:relative}
 .header h1{font-size:1.5rem;font-weight:700;margin:0;color:var(--primary);letter-spacing:.02em}
 .date-row{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:4px}
 .date-label{font-size:.85rem;color:var(--text-m);font-weight:500}
 .sync-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .sync-dot.online{background:#22c55e}
 .sync-dot.offline{background:var(--text-l)}
+
+.user-bar{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:8px;
+}
+.user-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--surface-alt);padding:4px 12px 4px 6px;border-radius:20px;
+  font-size:.78rem;font-weight:600;color:var(--text-m);
+}
+.user-chip .chip-avatar{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem}
+.logout-btn{
+  font-family:inherit;font-size:.7rem;color:var(--text-l);
+  background:none;border:1px solid var(--border);border-radius:12px;
+  padding:4px 10px;cursor:pointer;font-weight:600;transition:all .15s;
+}
+.logout-btn:hover{border-color:var(--primary);color:var(--primary)}
+
+/* ── PARENT BADGE ── */
+.parent-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--reward-bg);color:var(--reward);
+  font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;
+  margin-top:6px;text-transform:uppercase;letter-spacing:.05em;
+}
 
 .stats{display:flex;gap:10px;margin-top:16px}
 .stat-card{flex:1;background:var(--surface);border-radius:14px;padding:14px 10px;text-align:center;box-shadow:var(--sh);border:1px solid var(--border)}
@@ -109,12 +161,16 @@ body{
 .task.done .task-thumb.empty{display:none}
 .task.done .task-thumb.has-photo{border:2px solid var(--success)}
 
+.task-thumb.disabled{cursor:default;opacity:.6}
+.task-thumb.disabled:active{transform:none}
+
 .task-info{flex:1;min-width:0}
 .task-name{font-size:.88rem;font-weight:600;transition:color .2s}
 .task.done .task-name{color:var(--success);text-decoration:line-through;text-decoration-thickness:2px}
 .task-xp{font-size:.7rem;font-weight:600;color:var(--text-l);margin-top:2px}
 .task.done .task-xp{color:var(--success)}
 .task-emoji{font-size:1.1rem;flex-shrink:0}
+.task-ts{font-size:.6rem;color:var(--text-l);margin-top:2px;font-weight:500}
 
 .reward-slot{
   margin-top:8px;border-radius:14px;padding:18px 16px;text-align:center;
@@ -168,6 +224,40 @@ body{
 
 <div id="loadingScreen" class="loading">Carregando...</div>
 
+<!-- ══════ LOGIN SCREEN ══════ -->
+<div id="loginScreen" hidden>
+  <div class="login-screen">
+    <div>
+      <div class="login-title">⚔️ Missões do Leon</div>
+      <div class="login-sub">Quem está acessando?</div>
+    </div>
+    <div class="login-cards">
+      <div class="login-card" data-user="leon">
+        <div class="login-avatar leon">🦁</div>
+        <div>
+          <div class="login-name">Leon</div>
+          <div class="login-role">Guerreiro em treinamento</div>
+        </div>
+      </div>
+      <div class="login-card" data-user="felipe">
+        <div class="login-avatar pai">👨</div>
+        <div>
+          <div class="login-name">Felipe</div>
+          <div class="login-role">Pai · Supervisor</div>
+        </div>
+      </div>
+      <div class="login-card" data-user="mayara">
+        <div class="login-avatar mae">👩</div>
+        <div>
+          <div class="login-name">Mayara</div>
+          <div class="login-role">Mãe · Supervisora</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ APP ══════ -->
 <div id="app" hidden>
   <header class="header">
     <h1>⚔️ Missões do Leon</h1>
@@ -175,6 +265,14 @@ body{
       <span class="date-label" id="dateLabel"></span>
       <span class="sync-dot" id="syncDot" title="Status da conexão"></span>
     </div>
+    <div class="user-bar">
+      <span class="user-chip">
+        <span class="chip-avatar" id="chipAvatar"></span>
+        <span id="chipName"></span>
+      </span>
+      <button class="logout-btn" id="logoutBtn">Trocar</button>
+    </div>
+    <div id="parentBadge" class="parent-badge" hidden>👁️ Modo supervisor</div>
   </header>
 
   <div class="stats">
@@ -196,7 +294,7 @@ body{
     <p>Todas as missões concluídas. Streak atualizado!</p>
   </div>
 
-  <div class="reset-row"><button class="reset-btn" id="resetBtn">Resetar dia</button></div>
+  <div class="reset-row" id="resetRow"><button class="reset-btn" id="resetBtn">Resetar dia</button></div>
 </div>
 
 <!-- Photo preview modal -->
@@ -233,6 +331,42 @@ const FIREBASE_CONFIG = {
   messagingSenderId: "",
   appId: ""
 };
+
+// ──────────────────────────────────────────────
+// 👤 USERS
+// ──────────────────────────────────────────────
+const USERS = {
+  leon:   { name: 'Leon',   emoji: '🦁', role: 'child',  bgClass: 'leon' },
+  felipe: { name: 'Felipe', emoji: '👨', role: 'parent', bgClass: 'pai' },
+  mayara: { name: 'Mayara', emoji: '👩', role: 'parent', bgClass: 'mae' },
+};
+
+let currentUser = null; // { id, name, emoji, role }
+
+function loadUser() {
+  try {
+    const saved = localStorage.getItem('missoes_user');
+    if (saved && USERS[saved]) {
+      currentUser = { id: saved, ...USERS[saved] };
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+function saveUser(userId) {
+  currentUser = { id: userId, ...USERS[userId] };
+  try { localStorage.setItem('missoes_user', userId); } catch(e) {}
+}
+
+function clearUser() {
+  currentUser = null;
+  try { localStorage.removeItem('missoes_user'); } catch(e) {}
+}
+
+function isParent() {
+  return currentUser?.role === 'parent';
+}
 
 // ──────────────────────────────────────────────
 // 📋 DEFINIÇÃO DAS TAREFAS
@@ -277,7 +411,7 @@ const RANKS = [
 // ──────────────────────────────────────────────
 // 🗂️ STATE
 // ──────────────────────────────────────────────
-let taskData = {};       // { taskId: { done, photo, ts } }
+let taskData = {};
 let progressData = { streak: 0, lastCompleteDate: null };
 let isOnline = false;
 let currentTaskId = null;
@@ -315,6 +449,11 @@ function displayStreak() {
   if (last === yest) return progressData.streak;
   return 0;
 }
+function formatTime(ts) {
+  if (!ts) return '';
+  const d = new Date(ts);
+  return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
 
 // ──────────────────────────────────────────────
 // 🔥 FIREBASE
@@ -330,7 +469,6 @@ async function initFirebase() {
 
     const today = todayKey();
 
-    // Subscribe to today's tasks
     const tasksCol = fb.collection(db, 'tasks');
     const q = fb.query(tasksCol, fb.where('date', '==', today));
     unsubTasks = fb.onSnapshot(q, snap => {
@@ -339,7 +477,6 @@ async function initFirebase() {
       render();
     });
 
-    // Subscribe to progress
     const stateRef = fb.doc(db, 'state', 'progress');
     unsubState = fb.onSnapshot(stateRef, snap => {
       if (snap.exists()) progressData = snap.data();
@@ -347,7 +484,6 @@ async function initFirebase() {
     });
 
     isOnline = true;
-    // Store fb module for later use
     window._fb = fb;
     return true;
   } catch (e) {
@@ -361,7 +497,8 @@ async function fbWriteTask(taskId, photo) {
   const today = todayKey();
   const docId = `${today}_${taskId}`;
   await fb.setDoc(fb.doc(db, 'tasks', docId), {
-    taskId, date: today, done: true, photo, ts: Date.now()
+    taskId, date: today, done: true, photo, ts: Date.now(),
+    completedBy: currentUser?.id || 'unknown'
   });
 }
 
@@ -390,7 +527,6 @@ function lsLoad() {
     if (!raw) return;
     const data = JSON.parse(raw);
     if (data.date !== todayKey()) {
-      // New day — check streak
       const wasComplete = ALL_IDS.every(id => data.tasks?.[id]?.done);
       const yest = yesterdayKey();
       if (wasComplete && data.date === yest) {
@@ -426,6 +562,7 @@ const cameraInput = document.getElementById('cameraInput');
 const compCanvas = document.getElementById('compCanvas');
 
 function capturePhoto(taskId) {
+  if (isParent()) return; // parents can't complete tasks
   currentTaskId = taskId;
   cameraInput.value = '';
   cameraInput.click();
@@ -484,7 +621,7 @@ document.getElementById('confirmBtn').addEventListener('click', async () => {
   if (isOnline) {
     try { await fbWriteTask(taskId, photo); } catch (e) { console.error(e); }
   } else {
-    taskData[taskId] = { done: true, photo, ts: Date.now(), taskId, date: todayKey() };
+    taskData[taskId] = { done: true, photo, ts: Date.now(), taskId, date: todayKey(), completedBy: currentUser?.id };
     lsSave();
     render();
   }
@@ -541,6 +678,14 @@ function render() {
   dot.className = 'sync-dot ' + (isOnline ? 'online' : 'offline');
   dot.title = isOnline ? 'Sincronizado na nuvem' : 'Modo local';
 
+  // User bar
+  document.getElementById('chipAvatar').textContent = currentUser?.emoji || '';
+  document.getElementById('chipName').textContent = currentUser?.name || '';
+  document.getElementById('parentBadge').hidden = !isParent();
+
+  // Reset only for parents
+  document.getElementById('resetRow').hidden = !isParent();
+
   const doneIds = ALL_IDS.filter(id => taskData[id]?.done);
   const doneXP = BLOCKS.reduce((s, b) =>
     s + b.tasks.reduce((a, t) => a + (taskData[t.id]?.done ? t.xp : 0), 0), 0);
@@ -584,26 +729,31 @@ function render() {
       let thumbHTML;
       if (done && photo) {
         thumbHTML = `<div class="task-thumb has-photo" data-photo="${task.id}"><img src="${photo}" alt="Prova"></div>`;
-      } else if (!done) {
+      } else if (!done && !isParent()) {
         thumbHTML = `<div class="task-thumb empty" data-capture="${task.id}">📷</div>`;
+      } else if (!done && isParent()) {
+        thumbHTML = `<div class="task-thumb empty disabled">⏳</div>`;
       } else {
         thumbHTML = `<div class="task-thumb empty" style="border-color:var(--success);color:var(--success)">✓</div>`;
       }
+
+      const tsText = done && td?.ts ? `Feito às ${formatTime(td.ts)}` : '';
 
       el.innerHTML = `
         ${thumbHTML}
         <div class="task-info">
           <div class="task-name">${task.name}</div>
           <div class="task-xp">+${task.xp} XP</div>
+          ${tsText ? `<div class="task-ts">${tsText}</div>` : ''}
         </div>
         <span class="task-emoji">${task.emoji}</span>`;
 
-      // Event: capture photo
+      // Event: capture photo (only Leon)
       const captureEl = el.querySelector('[data-capture]');
       if (captureEl) {
         captureEl.addEventListener('click', () => capturePhoto(task.id));
       }
-      // Event: view photo
+      // Event: view photo (everyone)
       const photoEl = el.querySelector('[data-photo]');
       if (photoEl) {
         photoEl.addEventListener('click', () => viewPhoto(photo));
@@ -669,9 +819,10 @@ function fireConfetti() {
 }
 
 // ──────────────────────────────────────────────
-// 🔄 RESET
+// 🔄 RESET (parents only)
 // ──────────────────────────────────────────────
 document.getElementById('resetBtn').addEventListener('click', async () => {
+  if (!isParent()) return;
   if (!confirm('Resetar todas as missões de hoje?')) return;
   taskData = {};
   if (isOnline) {
@@ -683,6 +834,29 @@ document.getElementById('resetBtn').addEventListener('click', async () => {
 });
 
 // ──────────────────────────────────────────────
+// 🔐 LOGIN FLOW
+// ──────────────────────────────────────────────
+document.querySelectorAll('.login-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const userId = card.dataset.user;
+    saveUser(userId);
+    showApp();
+  });
+});
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  clearUser();
+  document.getElementById('app').hidden = true;
+  document.getElementById('loginScreen').hidden = false;
+});
+
+function showApp() {
+  document.getElementById('loginScreen').hidden = true;
+  document.getElementById('app').hidden = false;
+  render();
+}
+
+// ──────────────────────────────────────────────
 // 🚀 INIT
 // ──────────────────────────────────────────────
 async function boot() {
@@ -691,8 +865,12 @@ async function boot() {
     lsLoad();
   }
   document.getElementById('loadingScreen').hidden = true;
-  document.getElementById('app').hidden = false;
-  render();
+
+  if (loadUser()) {
+    showApp();
+  } else {
+    document.getElementById('loginScreen').hidden = false;
+  }
 }
 
 // Register SW
