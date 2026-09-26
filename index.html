@@ -120,11 +120,31 @@ body{
 /* ── HEADER ── */
 .header{text-align:center;padding:20px 0 4px;position:relative}
 .header h1{font-size:1.5rem;font-weight:700;margin:0;color:var(--primary);letter-spacing:.02em}
-.date-row{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:4px}
-.date-label{font-size:.85rem;color:var(--text-m);font-weight:500}
+
+/* ── DATE NAV ── */
+.date-nav{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:6px}
+.nav-arrow{
+  background:none;border:1px solid var(--border);color:var(--text-m);
+  cursor:pointer;font-size:.9rem;padding:4px 10px;border-radius:10px;
+  font-family:inherit;font-weight:700;transition:all .15s;
+  display:flex;align-items:center;justify-content:center;
+}
+.nav-arrow:hover{background:var(--surface-alt);color:var(--primary);border-color:var(--primary)}
+.nav-arrow:active{transform:scale(.93)}
+.nav-arrow:disabled{opacity:.3;cursor:default;pointer-events:none}
+.date-label{font-size:.85rem;color:var(--text-m);font-weight:600;min-width:160px;text-align:center}
+.today-btn{
+  font-family:inherit;font-size:.68rem;font-weight:700;color:#fff;
+  background:var(--primary);border:none;border-radius:8px;
+  padding:4px 12px;cursor:pointer;margin-left:4px;transition:all .15s;
+}
+.today-btn:active{transform:scale(.93)}
+
+.sync-row{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:4px}
 .sync-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .sync-dot.online{background:#22c55e}
 .sync-dot.offline{background:var(--text-l)}
+.sync-label{font-size:.65rem;color:var(--text-l);font-weight:500}
 
 .user-bar{
   display:flex;align-items:center;justify-content:center;gap:8px;
@@ -142,14 +162,39 @@ body{
   padding:4px 10px;cursor:pointer;font-weight:600;transition:all .15s;
 }
 .logout-btn:hover{border-color:var(--primary);color:var(--primary)}
+.notif-btn{
+  font-family:inherit;font-size:.85rem;cursor:pointer;padding:4px 8px;
+  background:none;border:1px solid var(--border);border-radius:12px;
+  transition:all .15s;line-height:1;
+}
+.notif-btn:hover{border-color:var(--primary)}
+.notif-btn.active{background:var(--primary-bg);border-color:var(--primary)}
 
-/* ── PARENT BADGE ── */
+/* ── BADGES ── */
 .parent-badge{
   display:inline-flex;align-items:center;gap:4px;
   background:var(--reward-bg);color:var(--reward);
   font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;
   margin-top:6px;text-transform:uppercase;letter-spacing:.05em;
 }
+.history-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--surface-alt);color:var(--text-m);
+  font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;
+  margin-top:6px;
+}
+
+/* ── MINI CALENDAR ── */
+.mini-cal{display:flex;gap:8px;justify-content:center;margin-top:10px}
+.cal-day{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+.cal-day:active{transform:scale(.9)}
+.cal-lbl{font-size:.55rem;color:var(--text-l);font-weight:700;text-transform:uppercase}
+.cal-num{font-size:.6rem;color:var(--text-l);font-weight:600}
+.cal-dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--border);background:var(--surface)}
+.cal-dot.complete{background:var(--success);border-color:var(--success)}
+.cal-dot.partial{background:var(--reward);border-color:var(--reward)}
+.cal-dot.current{border-color:var(--primary);box-shadow:0 0 0 2px var(--primary-bg)}
+.cal-dot.current.complete{border-color:var(--success);box-shadow:0 0 0 2px var(--success-bg)}
 
 .stats{display:flex;gap:10px;margin-top:16px}
 .stat-card{flex:1;background:var(--surface);border-radius:14px;padding:14px 10px;text-align:center;box-shadow:var(--sh);border:1px solid var(--border)}
@@ -182,9 +227,10 @@ body{
   display:flex;align-items:center;gap:12px;
   background:var(--surface);border:1px solid var(--border);border-radius:12px;
   padding:12px 14px;box-shadow:var(--sh);
-  -webkit-user-select:none;user-select:none;
+  -webkit-user-select:none;user-select:none;transition:opacity .2s;
 }
 .task.done{background:var(--success-bg);border-color:var(--success)}
+.task.locked{opacity:.45;pointer-events:none}
 
 .task-thumb{
   width:44px;height:44px;border-radius:10px;flex-shrink:0;overflow:hidden;
@@ -210,6 +256,8 @@ body{
 .task.done .task-xp{color:var(--success)}
 .task-emoji{font-size:1.1rem;flex-shrink:0}
 .task-ts{font-size:.6rem;color:var(--text-l);margin-top:2px;font-weight:500}
+.task-who{font-size:.58rem;color:var(--text-l);font-weight:600;margin-top:1px}
+.study-dur{font-size:.65rem;color:var(--primary);font-weight:700;margin-top:2px}
 
 .reward-slot{
   margin-top:8px;border-radius:14px;padding:18px 16px;text-align:center;
@@ -331,9 +379,15 @@ body{
 <div id="app" hidden>
   <header class="header">
     <h1>⚔️ Missões do Leon</h1>
-    <div class="date-row">
+    <div class="date-nav">
+      <button class="nav-arrow" id="prevDay">◀</button>
       <span class="date-label" id="dateLabel"></span>
+      <button class="nav-arrow" id="nextDay" disabled>▶</button>
+      <button class="today-btn" id="todayBtn" hidden>Hoje</button>
+    </div>
+    <div class="sync-row">
       <span class="sync-dot" id="syncDot" title="Status da conexão"></span>
+      <span class="sync-label" id="syncLabel">Conectando...</span>
     </div>
     <div class="user-bar">
       <span class="user-chip">
@@ -341,14 +395,18 @@ body{
         <span id="chipName"></span>
       </span>
       <button class="logout-btn" id="logoutBtn">Trocar</button>
+      <button class="notif-btn" id="notifBtn" title="Lembretes">🔕</button>
     </div>
     <div id="parentBadge" class="parent-badge" hidden>👁️ Modo supervisor</div>
+    <div id="historyBadge" class="history-badge" hidden>📅 Visualizando histórico</div>
   </header>
+
+  <div class="mini-cal" id="miniCal"></div>
 
   <div class="stats">
     <div class="stat-card"><div class="stat-icon">🔥</div><div class="stat-value streak-val" id="streakVal">0</div><div class="stat-label">Dias seguidos</div></div>
     <div class="stat-card"><div class="stat-icon" id="rankIcon">🛡️</div><div class="stat-value rank-val" id="rankName">Recruta</div><div class="stat-label">Patente</div></div>
-    <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-value" id="doneCount">0/10</div><div class="stat-label">Hoje</div></div>
+    <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-value" id="doneCount">0/10</div><div class="stat-label" id="doneLabel">Hoje</div></div>
   </div>
 
   <div class="xp-section">
@@ -389,9 +447,12 @@ body{
 <input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
 <canvas id="compCanvas" hidden></canvas>
 
-<script type="module">
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script>
 // ──────────────────────────────────────────────
-// 🔧 FIREBASE CONFIG — cole aqui o SEU config
+// 🔧 FIREBASE CONFIG
 // ──────────────────────────────────────────────
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyCjFVIAeuEqqradi6UHPMdB5mPKoV571E0",
@@ -412,10 +473,10 @@ const USERS = {
 };
 
 let currentUser = null;
-let userPins = {}; // { leon: '1234', felipe: '5678', ... }
+let userPins = {};
 let pinBuffer = '';
-let pinMode = ''; // 'login', 'create', 'confirm'
-let pinCreating = ''; // temp PIN during creation
+let pinMode = '';
+let pinCreating = '';
 let selectedUserId = '';
 
 function loadPins() {
@@ -427,26 +488,21 @@ function loadPins() {
 
 function savePins() {
   try { localStorage.setItem('missoes_pins', JSON.stringify(userPins)); } catch(e) {}
-  // Also save to Firebase if available
-  if (isOnline && db && window._fb) {
-    const fb = window._fb;
-    fb.setDoc(fb.doc(db, 'state', 'pins'), userPins).catch(() => {});
+  if (isOnline && db) {
+    db.collection('state').doc('pins').set(userPins).catch(() => {});
   }
 }
 
 async function loadPinsFromFirebase() {
-  if (!db || !window._fb) return;
+  if (!db) return;
   try {
-    const fb = window._fb;
-    const snap = await fb.getDoc(fb.doc(db, 'state', 'pins'));
-    if (snap.exists()) {
+    const snap = await db.collection('state').doc('pins').get();
+    if (snap.exists) {
       const remotePins = snap.data();
-      // Merge: remote wins if local doesn't have it
       for (const uid of Object.keys(USERS)) {
-        if (remotePins[uid] && !userPins[uid]) userPins[uid] = remotePins[uid];
-        else if (remotePins[uid]) userPins[uid] = remotePins[uid]; // remote always wins
+        if (remotePins[uid]) userPins[uid] = remotePins[uid];
       }
-      savePins(); // sync back to localStorage
+      savePins();
     }
   } catch(e) {}
 }
@@ -528,20 +584,15 @@ function handlePinKey(key) {
     document.getElementById('pinError').textContent = '';
     return;
   }
-
   if (pinBuffer.length >= 4) return;
   pinBuffer += key;
   updatePinDots();
-
-  if (pinBuffer.length === 4) {
-    setTimeout(() => processPinComplete(), 150);
-  }
+  if (pinBuffer.length === 4) setTimeout(() => processPinComplete(), 150);
 }
 
 function processPinComplete() {
   if (pinMode === 'login') {
     if (pinBuffer === userPins[selectedUserId]) {
-      // Correct!
       saveUser(selectedUserId);
       document.getElementById('pinScreen').hidden = true;
       showApp();
@@ -558,7 +609,6 @@ function processPinComplete() {
     updatePinDots();
   } else if (pinMode === 'confirm') {
     if (pinBuffer === pinCreating) {
-      // PIN created!
       userPins[selectedUserId] = pinBuffer;
       savePins();
       saveUser(selectedUserId);
@@ -574,7 +624,6 @@ function processPinComplete() {
   }
 }
 
-// PIN pad events
 document.querySelectorAll('.pin-key[data-key]').forEach(btn => {
   btn.addEventListener('click', () => handlePinKey(btn.dataset.key));
 });
@@ -589,7 +638,7 @@ document.getElementById('pinBack').addEventListener('click', () => {
 // ──────────────────────────────────────────────
 // 📋 DEFINIÇÃO DAS TAREFAS
 // ──────────────────────────────────────────────
-const BLOCKS = [
+const BLOCKS_FULL = [
   {
     name: 'Manhã', cls: 'morning', icon: '☀️',
     tasks: [
@@ -601,7 +650,8 @@ const BLOCKS = [
     tasks: [
       { id: 't1', name: 'Tomar banho (ao chegar)', emoji: '🚿', xp: 10 },
       { id: 't2', name: 'Escovar os dentes (após almoço)', emoji: '🪥', xp: 10 },
-      { id: 't3', name: 'Estudar', emoji: '📖', xp: 20 },
+      { id: 't3', name: 'Começar a estudar', emoji: '📖', xp: 10, weekdayOnly: true },
+      { id: 't3b', name: 'Terminar de estudar', emoji: '✅', xp: 10, weekdayOnly: true, requiresBefore: 't3' },
     ]
   },
   {
@@ -609,14 +659,13 @@ const BLOCKS = [
     tasks: [
       { id: 'n1', name: 'Jantar', emoji: '🍽️', xp: 5 },
       { id: 'n2', name: 'Escovar os dentes (após jantar)', emoji: '🪥', xp: 10 },
-      { id: 'n3', name: 'Arrumar material, uniforme e merenda', emoji: '🎒', xp: 15 },
+      { id: 'n3', name: 'Arrumar material, uniforme e merenda', emoji: '🎒', xp: 15, weekdayOnly: true },
       { id: 'n4', name: 'Tomar banho', emoji: '🛁', xp: 10 },
       { id: 'n5', name: 'Escovar os dentes (antes de dormir)', emoji: '🪥', xp: 10 },
     ]
   }
 ];
-const ALL_IDS = BLOCKS.flatMap(b => b.tasks.map(t => t.id));
-const TOTAL_XP = BLOCKS.reduce((s, b) => s + b.tasks.reduce((a, t) => a + t.xp, 0), 0);
+
 const RANKS = [
   { min: 0, name: 'Recruta', icon: '🛡️' },
   { min: 3, name: 'Soldado', icon: '⚔️' },
@@ -626,17 +675,44 @@ const RANKS = [
   { min: 60, name: 'Lenda', icon: '👑' },
 ];
 
+function isWeekend(dateStr) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const day = new Date(y, m - 1, d).getDay();
+  return day === 0 || day === 6;
+}
+
+function getBlocksForDate(dateStr) {
+  const weekend = isWeekend(dateStr);
+  return BLOCKS_FULL.map(block => ({
+    ...block,
+    tasks: block.tasks.filter(t => !t.weekdayOnly || !weekend)
+  })).filter(block => block.tasks.length > 0);
+}
+
+function getActiveIds(dateStr) {
+  return getBlocksForDate(dateStr).flatMap(b => b.tasks.map(t => t.id));
+}
+
+function getTotalXP(dateStr) {
+  return getBlocksForDate(dateStr).reduce((s, b) =>
+    s + b.tasks.reduce((a, t) => a + t.xp, 0), 0);
+}
+
 // ──────────────────────────────────────────────
 // 🗂️ STATE
 // ──────────────────────────────────────────────
-let taskData = {};
-let progressData = { streak: 0, lastCompleteDate: null };
+let taskData = {};       // today's tasks (real-time from Firebase)
+let viewTaskData = {};   // viewed date's tasks (one-time query)
+let progressData = { streak: 0, lastCompleteDate: null, completedDays: [] };
 let isOnline = false;
 let currentTaskId = null;
 let pendingPhoto = null;
 let db = null;
 let unsubTasks = null;
 let unsubState = null;
+let viewingDate = '';     // date being viewed
+let notificationsOn = false;
+let notifiedBlocks = {};  // track notified blocks today
 
 // ──────────────────────────────────────────────
 // 📅 HELPERS
@@ -649,8 +725,20 @@ function yesterdayKey() {
   const d = new Date(); d.setDate(d.getDate()-1);
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
-function formatDate() {
-  const d = new Date();
+function dateToKey(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function keyToDate(key) {
+  const [y, m, d] = key.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+function addDays(dateStr, n) {
+  const d = keyToDate(dateStr);
+  d.setDate(d.getDate() + n);
+  return dateToKey(d);
+}
+function formatDateStr(dateStr) {
+  const d = keyToDate(dateStr);
   const days = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
   const months = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
   return `${days[d.getDay()]}, ${d.getDate()} de ${months[d.getMonth()]}`;
@@ -672,6 +760,19 @@ function formatTime(ts) {
   const d = new Date(ts);
   return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
 }
+function formatDuration(ms) {
+  const mins = Math.round(ms / 60000);
+  if (mins < 60) return `${mins} min`;
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  return m > 0 ? `${h}h ${m}min` : `${h}h`;
+}
+function isViewingToday() {
+  return viewingDate === todayKey();
+}
+function getViewData() {
+  return isViewingToday() ? taskData : viewTaskData;
+}
 
 // ──────────────────────────────────────────────
 // 🔥 FIREBASE
@@ -679,30 +780,39 @@ function formatTime(ts) {
 async function initFirebase() {
   if (!FIREBASE_CONFIG.apiKey) return false;
   try {
-    const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js');
-    const fb = await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+    if (typeof firebase === 'undefined') {
+      console.warn('Firebase SDK not loaded');
+      return false;
+    }
 
-    const app = initializeApp(FIREBASE_CONFIG);
-    db = fb.getFirestore(app);
+    const app = firebase.initializeApp(FIREBASE_CONFIG);
+    db = firebase.firestore(app);
 
     const today = todayKey();
 
-    const tasksCol = fb.collection(db, 'tasks');
-    const q = fb.query(tasksCol, fb.where('date', '==', today));
-    unsubTasks = fb.onSnapshot(q, snap => {
-      taskData = {};
-      snap.docs.forEach(d => { taskData[d.data().taskId] = d.data(); });
-      render();
-    });
+    // Real-time listener for today's tasks
+    unsubTasks = db.collection('tasks').where('date', '==', today)
+      .onSnapshot(snap => {
+        taskData = {};
+        snap.docs.forEach(d => { taskData[d.data().taskId] = d.data(); });
+        if (isViewingToday()) render();
+      });
 
-    const stateRef = fb.doc(db, 'state', 'progress');
-    unsubState = fb.onSnapshot(stateRef, snap => {
-      if (snap.exists()) progressData = snap.data();
-      render();
-    });
+    // Real-time listener for progress
+    unsubState = db.collection('state').doc('progress')
+      .onSnapshot(snap => {
+        if (snap.exists) {
+          const data = snap.data();
+          progressData = {
+            streak: data.streak || 0,
+            lastCompleteDate: data.lastCompleteDate || null,
+            completedDays: data.completedDays || []
+          };
+        }
+        render();
+      });
 
     isOnline = true;
-    window._fb = fb;
     return true;
   } catch (e) {
     console.warn('Firebase init failed:', e);
@@ -710,30 +820,38 @@ async function initFirebase() {
   }
 }
 
+async function loadDateFromFirebase(dateStr) {
+  if (!db) return {};
+  try {
+    const snap = await db.collection('tasks').where('date', '==', dateStr).get();
+    const data = {};
+    snap.docs.forEach(d => { data[d.data().taskId] = d.data(); });
+    return data;
+  } catch (e) {
+    console.warn('Failed to load date:', e);
+    return {};
+  }
+}
+
 async function fbWriteTask(taskId, photo) {
-  const fb = window._fb;
   const today = todayKey();
   const docId = `${today}_${taskId}`;
-  await fb.setDoc(fb.doc(db, 'tasks', docId), {
+  await db.collection('tasks').doc(docId).set({
     taskId, date: today, done: true, photo, ts: Date.now(),
     completedBy: currentUser?.id || 'unknown'
   });
 }
 
-async function fbWriteProgress(streak, lastDate) {
-  const fb = window._fb;
-  await fb.setDoc(fb.doc(db, 'state', 'progress'), {
-    streak, lastCompleteDate: lastDate
+async function fbWriteProgress(streak, lastDate, completedDays) {
+  await db.collection('state').doc('progress').set({
+    streak, lastCompleteDate: lastDate, completedDays: completedDays || []
   });
 }
 
 async function fbDeleteToday() {
-  const fb = window._fb;
   const today = todayKey();
-  const tasksCol = fb.collection(db, 'tasks');
-  const q = fb.query(tasksCol, fb.where('date', '==', today));
-  const snap = await fb.getDocs(q);
-  for (const d of snap.docs) await fb.deleteDoc(d.ref);
+  const snap = await db.collection('tasks').where('date', '==', today).get();
+  for (const d of snap.docs) await d.ref.delete();
 }
 
 // ──────────────────────────────────────────────
@@ -745,19 +863,20 @@ function lsLoad() {
     if (!raw) return;
     const data = JSON.parse(raw);
     if (data.date !== todayKey()) {
-      const wasComplete = ALL_IDS.every(id => data.tasks?.[id]?.done);
+      const allIds = getActiveIds(data.date || todayKey());
+      const wasComplete = allIds.every(id => data.tasks?.[id]?.done);
       const yest = yesterdayKey();
       if (wasComplete && data.date === yest) {
-        progressData = { streak: (data.streak || 0) + 1, lastCompleteDate: data.date };
+        progressData = { streak: (data.streak || 0) + 1, lastCompleteDate: data.date, completedDays: data.completedDays || [] };
       } else if (data.lastCompleteDate === yest) {
-        progressData = { streak: data.streak || 0, lastCompleteDate: data.lastCompleteDate };
+        progressData = { streak: data.streak || 0, lastCompleteDate: data.lastCompleteDate, completedDays: data.completedDays || [] };
       } else {
-        progressData = { streak: 0, lastCompleteDate: data.lastCompleteDate };
+        progressData = { streak: 0, lastCompleteDate: data.lastCompleteDate, completedDays: data.completedDays || [] };
       }
       taskData = {};
     } else {
       taskData = data.tasks || {};
-      progressData = { streak: data.streak || 0, lastCompleteDate: data.lastCompleteDate };
+      progressData = { streak: data.streak || 0, lastCompleteDate: data.lastCompleteDate, completedDays: data.completedDays || [] };
     }
   } catch (e) {}
 }
@@ -768,10 +887,111 @@ function lsSave() {
       date: todayKey(),
       tasks: taskData,
       streak: progressData.streak,
-      lastCompleteDate: progressData.lastCompleteDate
+      lastCompleteDate: progressData.lastCompleteDate,
+      completedDays: progressData.completedDays || []
     }));
   } catch (e) {}
 }
+
+// ──────────────────────────────────────────────
+// 📅 DATE NAVIGATION
+// ──────────────────────────────────────────────
+async function navigateDate(offset) {
+  const newDate = addDays(viewingDate, offset);
+  const today = todayKey();
+  if (newDate > today) return;
+  viewingDate = newDate;
+
+  if (newDate === today) {
+    // Use real-time data
+    viewTaskData = {};
+  } else {
+    // Load from Firebase
+    if (isOnline) {
+      viewTaskData = await loadDateFromFirebase(newDate);
+    } else {
+      viewTaskData = {};
+    }
+  }
+  render();
+}
+
+document.getElementById('prevDay').addEventListener('click', () => navigateDate(-1));
+document.getElementById('nextDay').addEventListener('click', () => navigateDate(1));
+document.getElementById('todayBtn').addEventListener('click', () => {
+  viewingDate = todayKey();
+  viewTaskData = {};
+  render();
+});
+
+// ──────────────────────────────────────────────
+// 🔔 NOTIFICATIONS
+// ──────────────────────────────────────────────
+function loadNotifSetting() {
+  try { notificationsOn = localStorage.getItem('missoes_notif') === 'on'; } catch(e) {}
+}
+
+async function toggleNotifications() {
+  if (!('Notification' in window)) {
+    alert('Seu navegador não suporta notificações');
+    return;
+  }
+  if (!notificationsOn) {
+    const perm = await Notification.requestPermission();
+    if (perm === 'granted') {
+      notificationsOn = true;
+      try { localStorage.setItem('missoes_notif', 'on'); } catch(e) {}
+      startNotifCheck();
+    } else {
+      alert('Permissão de notificação negada. Ative nas configurações do navegador.');
+    }
+  } else {
+    notificationsOn = false;
+    try { localStorage.setItem('missoes_notif', 'off'); } catch(e) {}
+  }
+  render();
+}
+
+function startNotifCheck() {
+  checkAndNotify();
+  setInterval(checkAndNotify, 60000);
+}
+
+function checkAndNotify() {
+  if (!notificationsOn || Notification.permission !== 'granted') return;
+  const now = new Date();
+  const hour = now.getHours();
+  const today = todayKey();
+  const blocks = getBlocksForDate(today);
+
+  const schedule = [
+    { cls: 'morning', name: 'Manhã', startHour: 7, endHour: 9 },
+    { cls: 'afternoon', name: 'Tarde', startHour: 13, endHour: 15 },
+    { cls: 'night', name: 'Noite', startHour: 19, endHour: 21 },
+  ];
+
+  for (const s of schedule) {
+    if (hour >= s.startHour && hour < s.endHour) {
+      const key = `${today}_${s.cls}`;
+      if (notifiedBlocks[key]) continue;
+      const block = blocks.find(b => b.cls === s.cls);
+      if (!block) continue;
+      const pending = block.tasks.filter(t => !taskData[t.id]?.done);
+      if (pending.length > 0) {
+        try {
+          new Notification('⚔️ Missões do Leon', {
+            body: `${s.name}: ${pending.length} missão(ões) pendente(s)!`,
+            icon: 'icon-192.png',
+            tag: key
+          });
+        } catch(e) {}
+        notifiedBlocks[key] = true;
+      }
+    }
+  }
+}
+
+document.getElementById('notifBtn').addEventListener('click', toggleNotifications);
 
 // ──────────────────────────────────────────────
 // 📸 PHOTO HANDLING
@@ -780,7 +1000,8 @@ const cameraInput = document.getElementById('cameraInput');
 const compCanvas = document.getElementById('compCanvas');
 
 function capturePhoto(taskId) {
-  if (isParent()) return; // parents can't complete tasks
+  if (isParent()) return;
+  if (!isViewingToday()) return;
   currentTaskId = taskId;
   cameraInput.value = '';
   cameraInput.click();
@@ -814,7 +1035,8 @@ function compressImage(file) {
 }
 
 function showPreview(photo, taskId) {
-  const task = BLOCKS.flatMap(b => b.tasks).find(t => t.id === taskId);
+  const allTasks = BLOCKS_FULL.flatMap(b => b.tasks);
+  const task = allTasks.find(t => t.id === taskId);
   document.getElementById('previewImg').src = photo;
   document.getElementById('previewTitle').textContent = task?.name || 'Confirmar';
   document.getElementById('photoModal').hidden = false;
@@ -845,7 +1067,8 @@ document.getElementById('confirmBtn').addEventListener('click', async () => {
   }
 
   // Check all done
-  const allDone = ALL_IDS.every(id =>
+  const activeIds = getActiveIds(todayKey());
+  const allDone = activeIds.every(id =>
     id === taskId ? true : taskData[id]?.done
   );
   if (allDone) {
@@ -857,9 +1080,15 @@ document.getElementById('confirmBtn').addEventListener('click', async () => {
     else if (last === yest) newStreak = current + 1;
     else newStreak = 1;
 
-    progressData = { streak: newStreak, lastCompleteDate: today };
+    // Track completed days
+    const completedDays = [...(progressData.completedDays || [])];
+    if (!completedDays.includes(today)) completedDays.push(today);
+    // Keep last 90 days to avoid doc growing forever
+    while (completedDays.length > 90) completedDays.shift();
+
+    progressData = { streak: newStreak, lastCompleteDate: today, completedDays };
     if (isOnline) {
-      try { await fbWriteProgress(newStreak, today); } catch (e) {}
+      try { await fbWriteProgress(newStreak, today, completedDays); } catch (e) {}
     } else {
       lsSave();
     }
@@ -867,11 +1096,14 @@ document.getElementById('confirmBtn').addEventListener('click', async () => {
   }
 
   // Check afternoon unlock
-  const aftBlock = BLOCKS.find(b => b.reward);
-  const aftDone = aftBlock.tasks.every(t =>
-    t.id === taskId ? true : taskData[t.id]?.done
-  );
-  if (aftDone) setTimeout(fireConfetti, 100);
+  const blocks = getBlocksForDate(todayKey());
+  const aftBlock = blocks.find(b => b.reward);
+  if (aftBlock) {
+    const aftDone = aftBlock.tasks.every(t =>
+      t.id === taskId ? true : taskData[t.id]?.done
+    );
+    if (aftDone) setTimeout(fireConfetti, 100);
+  }
 });
 
 // Photo viewer
@@ -888,40 +1120,105 @@ function viewPhoto(photo) {
 }
 
 // ──────────────────────────────────────────────
+// 📅 MINI CALENDAR
+// ──────────────────────────────────────────────
+function renderMiniCalendar() {
+  const calEl = document.getElementById('miniCal');
+  calEl.innerHTML = '';
+  const dayLabels = ['D','S','T','Q','Q','S','S'];
+  const today = todayKey();
+
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const key = dateToKey(d);
+    const complete = (progressData.completedDays || []).includes(key);
+    const isCurrent = key === viewingDate;
+
+    const dayEl = document.createElement('div');
+    dayEl.className = 'cal-day';
+    dayEl.innerHTML = `
+      <span class="cal-lbl">${dayLabels[d.getDay()]}</span>
+      <span class="cal-dot${complete ? ' complete' : ''}${isCurrent ? ' current' : ''}"></span>
+      <span class="cal-num">${d.getDate()}</span>`;
+
+    dayEl.addEventListener('click', async () => {
+      if (key === viewingDate) return;
+      viewingDate = key;
+      if (key === today) {
+        viewTaskData = {};
+      } else if (isOnline) {
+        viewTaskData = await loadDateFromFirebase(key);
+      } else {
+        viewTaskData = {};
+      }
+      render();
+    });
+
+    calEl.appendChild(dayEl);
+  }
+}
+
+// ──────────────────────────────────────────────
 // 🎨 RENDER
 // ──────────────────────────────────────────────
 function render() {
-  document.getElementById('dateLabel').textContent = formatDate();
+  const today = todayKey();
+  const viewToday = isViewingToday();
+  const vData = getViewData();
+  const blocks = getBlocksForDate(viewingDate);
+  const activeIds = getActiveIds(viewingDate);
+  const totalXP = getTotalXP(viewingDate);
+
+  // Date nav
+  document.getElementById('dateLabel').textContent = formatDateStr(viewingDate);
+  document.getElementById('nextDay').disabled = viewingDate >= today;
+  document.getElementById('todayBtn').hidden = viewToday;
+
+  // Sync
   const dot = document.getElementById('syncDot');
   dot.className = 'sync-dot ' + (isOnline ? 'online' : 'offline');
-  dot.title = isOnline ? 'Sincronizado na nuvem' : 'Modo local';
+  const syncLbl = document.getElementById('syncLabel');
+  syncLbl.textContent = isOnline ? 'Sincronizado' : 'Modo local';
 
   // User bar
   document.getElementById('chipAvatar').textContent = currentUser?.emoji || '';
   document.getElementById('chipName').textContent = currentUser?.name || '';
-  document.getElementById('parentBadge').hidden = !isParent();
+  document.getElementById('parentBadge').hidden = !isParent() || !viewToday;
+  document.getElementById('historyBadge').hidden = viewToday;
 
-  // Reset only for parents
-  document.getElementById('resetRow').hidden = !isParent();
+  // Notifications button
+  const notifBtn = document.getElementById('notifBtn');
+  notifBtn.textContent = notificationsOn ? '🔔' : '🔕';
+  notifBtn.className = 'notif-btn' + (notificationsOn ? ' active' : '');
 
-  const doneIds = ALL_IDS.filter(id => taskData[id]?.done);
-  const doneXP = BLOCKS.reduce((s, b) =>
-    s + b.tasks.reduce((a, t) => a + (taskData[t.id]?.done ? t.xp : 0), 0), 0);
+  // Reset only for parents viewing today
+  document.getElementById('resetRow').hidden = !isParent() || !viewToday;
+
+  // Stats
+  const doneIds = activeIds.filter(id => vData[id]?.done);
+  const doneXP = blocks.reduce((s, b) =>
+    s + b.tasks.reduce((a, t) => a + (vData[t.id]?.done ? t.xp : 0), 0), 0);
   const streak = displayStreak();
   const rank = getRank(streak);
 
   document.getElementById('streakVal').textContent = streak;
   document.getElementById('rankIcon').textContent = rank.icon;
   document.getElementById('rankName').textContent = rank.name;
-  document.getElementById('doneCount').textContent = `${doneIds.length}/${ALL_IDS.length}`;
-  document.getElementById('xpCount').textContent = `${doneXP} / ${TOTAL_XP}`;
-  document.getElementById('xpFill').style.width = `${(doneXP / TOTAL_XP) * 100}%`;
+  document.getElementById('doneCount').textContent = `${doneIds.length}/${activeIds.length}`;
+  document.getElementById('doneLabel').textContent = viewToday ? 'Hoje' : keyToDate(viewingDate).getDate() + '/' + (keyToDate(viewingDate).getMonth()+1);
+  document.getElementById('xpCount').textContent = `${doneXP} / ${totalXP}`;
+  document.getElementById('xpFill').style.width = totalXP > 0 ? `${(doneXP / totalXP) * 100}%` : '0%';
 
+  // Mini calendar
+  renderMiniCalendar();
+
+  // Blocks
   const blocksEl = document.getElementById('blocks');
   blocksEl.innerHTML = '';
 
-  for (const block of BLOCKS) {
-    const bDone = block.tasks.filter(t => taskData[t.id]?.done).length;
+  for (const block of blocks) {
+    const bDone = block.tasks.filter(t => vData[t.id]?.done).length;
     const bTotal = block.tasks.length;
     const complete = bDone === bTotal;
 
@@ -938,40 +1235,56 @@ function render() {
     const list = section.querySelector('.task-list');
 
     for (const task of block.tasks) {
-      const td = taskData[task.id];
+      const td = vData[task.id];
       const done = !!td?.done;
       const photo = td?.photo;
+
+      // Check if task is locked (requiresBefore not done)
+      const locked = task.requiresBefore && !vData[task.requiresBefore]?.done;
+
       const el = document.createElement('div');
-      el.className = 'task' + (done ? ' done' : '');
+      el.className = 'task' + (done ? ' done' : '') + (locked ? ' locked' : '');
 
       let thumbHTML;
       if (done && photo) {
         thumbHTML = `<div class="task-thumb has-photo" data-photo="${task.id}"><img src="${photo}" alt="Prova"></div>`;
-      } else if (!done && !isParent()) {
+      } else if (!done && !isParent() && viewToday && !locked) {
         thumbHTML = `<div class="task-thumb empty" data-capture="${task.id}">📷</div>`;
-      } else if (!done && isParent()) {
+      } else if (!done && (isParent() || !viewToday)) {
         thumbHTML = `<div class="task-thumb empty disabled">⏳</div>`;
+      } else if (locked) {
+        thumbHTML = `<div class="task-thumb empty disabled">🔒</div>`;
       } else {
         thumbHTML = `<div class="task-thumb empty" style="border-color:var(--success);color:var(--success)">✓</div>`;
       }
 
       const tsText = done && td?.ts ? `Feito às ${formatTime(td.ts)}` : '';
+      const whoText = done && td?.completedBy && USERS[td.completedBy]
+        ? `por ${USERS[td.completedBy].emoji} ${USERS[td.completedBy].name}` : '';
+
+      // Study duration
+      let studyDur = '';
+      if (task.id === 't3b' && done && vData['t3']?.done && td?.ts && vData['t3']?.ts) {
+        const dur = td.ts - vData['t3'].ts;
+        if (dur > 0) studyDur = `📚 Estudou por ${formatDuration(dur)}`;
+      }
 
       el.innerHTML = `
         ${thumbHTML}
         <div class="task-info">
           <div class="task-name">${task.name}</div>
           <div class="task-xp">+${task.xp} XP</div>
-          ${tsText ? `<div class="task-ts">${tsText}</div>` : ''}
+          ${tsText ? `<div class="task-ts">${tsText}${whoText ? ' · ' + whoText : ''}</div>` : ''}
+          ${studyDur ? `<div class="study-dur">${studyDur}</div>` : ''}
         </div>
         <span class="task-emoji">${task.emoji}</span>`;
 
-      // Event: capture photo (only Leon)
+      // Event: capture photo
       const captureEl = el.querySelector('[data-capture]');
       if (captureEl) {
         captureEl.addEventListener('click', () => capturePhoto(task.id));
       }
-      // Event: view photo (everyone)
+      // Event: view photo
       const photoEl = el.querySelector('[data-photo]');
       if (photoEl) {
         photoEl.addEventListener('click', () => viewPhoto(photo));
@@ -982,13 +1295,13 @@ function render() {
 
     // Reward slot
     if (block.reward) {
-      const aftDone = block.tasks.every(t => taskData[t.id]?.done);
+      const aftDone = block.tasks.every(t => vData[t.id]?.done);
       const slot = document.createElement('div');
       slot.className = 'reward-slot ' + (aftDone ? 'unlocked' : 'locked');
       if (aftDone) {
         slot.innerHTML = `<div class="rw-title">🎮 Diversão Liberada!</div><div class="rw-sub">Todas as missões da tarde concluídas</div>`;
       } else {
-        const rem = block.tasks.filter(t => !taskData[t.id]?.done).length;
+        const rem = block.tasks.filter(t => !vData[t.id]?.done).length;
         slot.innerHTML = `<div class="rw-title">🔒 Diversão Bloqueada</div><div class="rw-sub">${rem} missão${rem > 1 ? 'ões' : ''} restante${rem > 1 ? 's' : ''}</div>`;
       }
       list.appendChild(slot);
@@ -997,7 +1310,7 @@ function render() {
     blocksEl.appendChild(section);
   }
 
-  const allDone = ALL_IDS.every(id => taskData[id]?.done);
+  const allDone = activeIds.every(id => vData[id]?.done);
   document.getElementById('dayDone').hidden = !allDone;
 }
 
@@ -1055,10 +1368,7 @@ document.getElementById('resetBtn').addEventListener('click', async () => {
 // 🔐 LOGIN FLOW
 // ──────────────────────────────────────────────
 document.querySelectorAll('.login-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const userId = card.dataset.user;
-    showPinScreen(userId);
-  });
+  card.addEventListener('click', () => showPinScreen(card.dataset.user));
 });
 
 document.getElementById('logoutBtn').addEventListener('click', () => {
@@ -1078,20 +1388,28 @@ function showApp() {
 // 🚀 INIT
 // ──────────────────────────────────────────────
 async function boot() {
+  viewingDate = todayKey();
   loadPins();
+  loadNotifSetting();
+
   const fbOk = await initFirebase();
   if (fbOk) {
     await loadPinsFromFirebase();
   } else {
     lsLoad();
   }
+
   document.getElementById('loadingScreen').hidden = true;
 
   if (loadUser()) {
-    // User was logged in before — go straight to app
     showApp();
   } else {
     document.getElementById('loginScreen').hidden = false;
+  }
+
+  // Start notification checks
+  if (notificationsOn && Notification.permission === 'granted') {
+    startNotifCheck();
   }
 }
 
