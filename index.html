@@ -230,6 +230,49 @@ button{font-family:'Pixelify Sans',monospace}
 .reset-btn{font-size:.95rem;color:var(--text-l);background:none;border:none;cursor:pointer;text-decoration:underline;padding:8px}
 .reset-btn:hover{color:var(--danger)}
 
+/* ═══════════ FX / ANIMAÇÕES ═══════════ */
+.task{position:relative;overflow:hidden}
+.task.just-done{animation:taskpop .45s steps(6)}
+@keyframes taskpop{0%{transform:scale(1)}30%{transform:scale(1.05)}60%{transform:scale(.98)}100%{transform:scale(1)}}
+.task.just-done::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);transform:translateX(-100%);animation:sweep .55s steps(8) forwards;pointer-events:none}
+@keyframes sweep{to{transform:translateX(100%)}}
+
+.reward-slot.locked{position:relative;min-height:126px;display:flex;align-items:center;justify-content:center;padding:0;overflow:hidden}
+.rw-wall,.fx-wall{display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:repeat(3,1fr)}
+.rw-wall{position:absolute;inset:0}
+.rw-b{position:relative;background:#6d665c;border:1px solid #1d1a16;box-shadow:inset 3px 3px 0 #8e867a,inset -3px -3px 0 #45403a}
+.rw-b:nth-child(4n+1){background:#655e54}
+.rw-b:nth-child(7n+3){background:#766e62}
+.rw-b.c1::after,.rw-b.c2::after{content:"";position:absolute;inset:3px;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%208%208%22%20shape-rendering%3D%22crispEdges%22%20fill%3D%22%231a1612%22%20fill-opacity%3D%22.9%22%3E%3Crect%20x%3D%223%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%223%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%224%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%223%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%225%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.rw-b.c2::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%208%208%22%20shape-rendering%3D%22crispEdges%22%20fill%3D%22%231a1612%22%20fill-opacity%3D%22.9%22%3E%3Crect%20x%3D%223%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%223%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%224%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%223%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%225%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%222%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%222%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%221%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%226%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%227%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%226%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%227%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%222%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%221%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%220%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%224%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22/%3E%3Crect%20x%3D%225%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22/%3E%3C/svg%3E")}
+.rw-sign{position:relative;z-index:2;margin:10px;padding:10px 14px;text-align:center;background:var(--panel);border:3px solid #000;box-shadow:var(--bevel),var(--drop)}
+.rw-sign .rw-sub{font-size:.95rem!important}
+
+.fx-wall{position:fixed;z-index:998;pointer-events:none}
+.fx-wall.shake{animation:wshake .1s steps(2) infinite}
+@keyframes wshake{0%{transform:translate(-3px,1px)}50%{transform:translate(3px,-2px)}}
+.reward-slot.walled{position:relative;overflow:hidden;animation:none}
+.reward-slot.walled>.rw-wall{z-index:3}
+.reward-slot.reveal{animation:reveal .6s steps(6)}
+@keyframes reveal{0%{transform:scale(.7)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
+
+.xp-float{position:fixed;z-index:1000;pointer-events:none;font-family:var(--px);font-size:.9rem;color:var(--reward);white-space:nowrap;
+  text-shadow:2px 2px 0 #000,-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000;animation:xpup 1.2s steps(12) forwards}
+@keyframes xpup{0%{opacity:0;transform:translate(-50%,-30%) scale(.6)}15%{opacity:1;transform:translate(-50%,-70%) scale(1.25)}100%{opacity:0;transform:translate(-50%,-280%) scale(1)}}
+.xp-section.xp-hit .xp-fill{animation:xpflash .7s steps(4)}
+@keyframes xpflash{25%,75%{filter:brightness(1.9)}50%{filter:brightness(1)}}
+.stat-card.bump .stat-value{animation:bump .45s steps(4)}
+@keyframes bump{50%{transform:scale(1.4)}}
+.block-prog.bump{animation:bump .45s steps(4)}
+
+.fx-toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 14px);z-index:1001;transform:translate(-50%,-180%);
+  background:var(--panel);border:3px solid #000;box-shadow:var(--bevel),var(--drop);padding:12px 16px;max-width:calc(100vw - 32px);
+  font-family:var(--px);font-size:.68rem;line-height:1.6;color:var(--text);text-shadow:2px 2px 0 #000;text-align:center;transition:transform .35s steps(5)}
+.fx-toast.show{transform:translate(-50%,0)}
+.fx-toast.gold{background:var(--reward);color:#fff;text-shadow:2px 2px 0 #6b4a00;box-shadow:inset 3px 3px 0 #ffe28a,inset -3px -3px 0 var(--reward-dk),var(--drop)}
+.fx-toast.green{background:var(--primary);color:#fff;box-shadow:inset 3px 3px 0 var(--primary-lt),inset -3px -3px 0 var(--primary-dk),var(--drop)}
+.day-done.drop{animation:drop .7s steps(7)}
+@keyframes drop{0%{transform:translateY(-40px) scale(.8);opacity:0}60%{transform:translateY(6px) scale(1.04);opacity:1}100%{transform:none}}
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:999}
 .loading{text-align:center;padding:80px 0;font-family:var(--px);font-size:.7rem;color:var(--text);text-shadow:2px 2px 0 #000;animation:blink 1s steps(2) infinite}
 
@@ -1048,18 +1091,8 @@ document.getElementById('confirmBtn').addEventListener('click', async () => {
     } else {
       lsSave();
     }
-    setTimeout(fireConfetti, 200);
   }
 
-  // Check afternoon unlock
-  const blocks = getBlocksForDate(todayKey());
-  const aftBlock = blocks.find(b => b.reward);
-  if (aftBlock) {
-    const aftDone = aftBlock.tasks.every(t =>
-      t.id === taskId ? true : taskData[t.id]?.done
-    );
-    if (aftDone) setTimeout(fireConfetti, 100);
-  }
 });
 
 // Photo viewer
@@ -1180,6 +1213,7 @@ function render() {
 
     const section = document.createElement('div');
     section.className = 'block';
+    section.dataset.block = block.cls;
     section.innerHTML = `
       <div class="block-hdr">
         <div class="block-ico ${block.cls}">${block.icon}</div>
@@ -1199,6 +1233,7 @@ function render() {
       const locked = task.requiresBefore && !vData[task.requiresBefore]?.done;
 
       const el = document.createElement('div');
+      el.dataset.tid = task.id;
       el.className = 'task' + (done ? ' done' : '') + (locked ? ' locked' : '');
 
       let thumbHTML;
@@ -1253,12 +1288,15 @@ function render() {
     if (block.reward) {
       const aftDone = block.tasks.every(t => vData[t.id]?.done);
       const slot = document.createElement('div');
+      slot.id = 'rewardSlot';
       slot.className = 'reward-slot ' + (aftDone ? 'unlocked' : 'locked');
       if (aftDone) {
         slot.innerHTML = `<div class="rw-title">🎮 Diversão Liberada!</div><div class="rw-sub">Todas as missões da tarde concluídas</div>`;
       } else {
         const rem = block.tasks.filter(t => !vData[t.id]?.done).length;
-        slot.innerHTML = `<div class="rw-title">🔒 Diversão Bloqueada</div><div class="rw-sub">${rem} missão${rem > 1 ? 'ões' : ''} restante${rem > 1 ? 's' : ''}</div>`;
+        const prog = (block.tasks.length - rem) / block.tasks.length;
+        slot.innerHTML = `<div class="rw-wall">${wallBlocksHTML(prog)}</div>
+          <div class="rw-sign"><div class="rw-title">🔒 Diversão Bloqueada</div><div class="rw-sub">Falta${rem > 1 ? 'm' : ''} ${rem} missão${rem > 1 ? 'ões' : ''} para quebrar a parede</div></div>`;
       }
       list.appendChild(slot);
     }
@@ -1268,41 +1306,267 @@ function render() {
 
   const allDone = activeIds.every(id => vData[id]?.done);
   document.getElementById('dayDone').hidden = !allDone;
+
+  if (viewToday) fxAfterRender(blocks, vData);
 }
 
 // ──────────────────────────────────────────────
-// 🎊 CONFETTI
+// 🎊 FX: partículas, sons, animações
 // ──────────────────────────────────────────────
+const REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FX_RECENT_MS = 90 * 1000;   // só anima conclusões recentes (evita animar tudo ao abrir o app)
+let fxPrevDone = null;            // Set de tarefas concluídas no último render de hoje
+let fxPrevDate = null;
+
+// ── Motor de partículas (quadradinhos pixelados) ──
+const FX = { parts: [], running: false, ctx: null, dpr: 1 };
+function fxCanvas() {
+  const c = document.getElementById('confetti');
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  if (c.width !== Math.round(innerWidth * dpr) || c.height !== Math.round(innerHeight * dpr)) {
+    c.width = Math.round(innerWidth * dpr); c.height = Math.round(innerHeight * dpr);
+  }
+  FX.ctx = c.getContext('2d'); FX.dpr = dpr;
+  FX.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return FX.ctx;
+}
+function fxLoop() {
+  const ctx = FX.ctx;
+  ctx.clearRect(0, 0, innerWidth, innerHeight);
+  FX.parts = FX.parts.filter(p => p.life > 0 && p.y < innerHeight + 40);
+  for (const p of FX.parts) {
+    if (p.delay > 0) { p.delay--; continue; }
+    p.vy += p.g; p.vx *= p.drag; p.x += p.vx; p.y += p.vy; p.life -= p.decay;
+    const s = Math.max(2, Math.round(p.size * (p.shrink ? Math.max(.3, p.life) : 1)));
+    ctx.globalAlpha = Math.min(1, p.life * 2);
+    ctx.fillStyle = '#000';
+    ctx.fillRect(Math.round(p.x - s/2) - 1, Math.round(p.y - s/2) - 1, s + 2, s + 2);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(Math.round(p.x - s/2), Math.round(p.y - s/2), s, s);
+  }
+  ctx.globalAlpha = 1;
+  if (FX.parts.length) requestAnimationFrame(fxLoop);
+  else { FX.running = false; ctx.clearRect(0, 0, innerWidth, innerHeight); }
+}
+function burst(x, y, o = {}) {
+  if (REDUCED) return;
+  fxCanvas();
+  const n = o.n || 24, colors = o.colors || ['#5dbb3a','#8fe05f','#f5c542'];
+  for (let i = 0; i < n; i++) {
+    const a = o.angle != null ? o.angle + (Math.random() - .5) * (o.spread || Math.PI * 2)
+                              : Math.random() * Math.PI * 2;
+    const sp = (o.speed || 6) * (.35 + Math.random() * .8);
+    FX.parts.push({
+      x: x + (Math.random() - .5) * (o.jitter || 0), y,
+      vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - (o.lift || 2),
+      g: o.g ?? .3, drag: o.drag ?? .98,
+      size: (o.size || 6) * (.6 + Math.random() * .8),
+      color: colors[(Math.random() * colors.length) | 0],
+      life: 1, decay: (o.decay || .018) * (.7 + Math.random() * .6),
+      shrink: o.shrink ?? true, delay: o.delay ? (Math.random() * o.delay) | 0 : 0
+    });
+  }
+  if (!FX.running) { FX.running = true; requestAnimationFrame(fxLoop); }
+}
 function fireConfetti() {
-  const canvas = document.getElementById('confetti');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  const colors = ['#5dbb3a','#8fe05f','#f5c542','#4fe3d6','#e04848','#8a6a1e'];
-  const pieces = Array.from({length:80}, () => ({
-    x: canvas.width*.5 + (Math.random()-.5)*200,
-    y: canvas.height*.4,
-    vx: (Math.random()-.5)*12, vy: -Math.random()*14-4,
-    w: Math.random()*8+4, h: Math.random()*6+3,
-    color: colors[Math.floor(Math.random()*colors.length)],
-    rot: Math.random()*Math.PI*2, vr: (Math.random()-.5)*.3, life: 1
-  }));
-  let frame = 0;
-  (function anim() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    let alive = false;
-    for (const p of pieces) {
-      if (p.life <= 0) continue;
-      alive = true; p.x += p.vx; p.vy += .35; p.y += p.vy;
-      p.rot += p.vr; p.life -= .012;
-      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
-      ctx.globalAlpha = Math.max(0,p.life);
-      ctx.fillStyle = p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
-      ctx.restore();
+  const colors = ['#5dbb3a','#8fe05f','#f5c542','#4fe3d6','#e04848','#ffffff'];
+  for (let k = 0; k < 5; k++) {
+    setTimeout(() => burst(innerWidth * (.15 + .7 * Math.random()), innerHeight * (.2 + .25 * Math.random()),
+      { n: 45, colors, speed: 9, size: 8, decay: .011, lift: 4 }), k * 220);
+  }
+  // chuva de blocos
+  burst(innerWidth / 2, -20, { n: 70, colors, speed: 2, jitter: innerWidth, g: .15, size: 9, decay: .006, angle: Math.PI/2, spread: .6, lift: -2, shrink: false, delay: 60 });
+}
+function rectCenter(el) { const r = el.getBoundingClientRect(); return { x: r.left + r.width/2, y: r.top + r.height/2, r }; }
+
+// ── Sons 8-bit (Web Audio, volume baixo) ──
+let AC = null;
+function ac() {
+  try {
+    if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
+    if (AC.state === 'suspended') AC.resume();
+  } catch (e) { AC = null; }
+  return AC;
+}
+document.addEventListener('pointerdown', () => ac(), { passive: true });
+function tone(freq, dur, when = 0, type = 'square', vol = .05, slideTo) {
+  const a = ac(); if (!a) return;
+  const t = a.currentTime + when, o = a.createOscillator(), g = a.createGain();
+  o.type = type; o.frequency.setValueAtTime(freq, t);
+  if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t + dur);
+  g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  o.connect(g).connect(a.destination); o.start(t); o.stop(t + dur + .02);
+}
+function noise(dur, when = 0, vol = .12, freq = 900) {
+  const a = ac(); if (!a) return;
+  const t = a.currentTime + when, len = Math.floor(a.sampleRate * dur);
+  const buf = a.createBuffer(1, len, a.sampleRate), d = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+  const src = a.createBufferSource(), f = a.createBiquadFilter(), g = a.createGain();
+  src.buffer = buf; f.type = 'lowpass'; f.frequency.setValueAtTime(freq, t);
+  f.frequency.exponentialRampToValueAtTime(80, t + dur);
+  g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  src.connect(f).connect(g).connect(a.destination); src.start(t);
+}
+const sfx = {
+  coin()   { tone(988, .08); tone(1319, .28, .08); },
+  block()  { [523, 659, 784, 1047].forEach((f, i) => tone(f, .12, i * .08)); },
+  crack()  { noise(.06, 0, .08, 2500); },
+  boom()   { noise(.7, 0, .22, 1400); tone(160, .5, 0, 'square', .07, 40); },
+  fanfare(){ [[523,.12],[659,.12],[784,.12],[1047,.2],[784,.1],[1047,.45]].reduce((t,[f,d]) => (tone(f, d, t, 'square', .05), t + d), 0); }
+};
+function buzz(p) { try { navigator.vibrate && navigator.vibrate(p); } catch (e) {} }
+
+// ── Toasts ──
+const toastQ = []; let toastBusy = false;
+function toast(html, cls = '') {
+  toastQ.push([html, cls]); if (!toastBusy) nextToast();
+}
+function nextToast() {
+  const it = toastQ.shift(); if (!it) { toastBusy = false; return; }
+  toastBusy = true;
+  const el = document.createElement('div');
+  el.className = 'fx-toast ' + it[1]; el.innerHTML = it[0];
+  document.body.appendChild(el);
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('show')));
+  setTimeout(() => el.classList.remove('show'), 1900);
+  setTimeout(() => { el.remove(); nextToast(); }, 2300);
+}
+
+function retrigger(el, cls, ms) {
+  if (!el) return;
+  el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls);
+  setTimeout(() => el.classList.remove(cls), ms);
+}
+
+// ── Parede de blocos da Diversão ──
+function wallHash(i) { const x = Math.sin(i * 12.9898 + 4.1) * 43758.5453; return x - Math.floor(x); }
+function wallBlocksHTML(progress) {
+  let h = '';
+  for (let i = 0; i < 30; i++) {
+    const r = wallHash(i);
+    const c = progress >= 1 ? ' c2' : r < progress * .6 ? ' c2' : r < progress ? ' c1' : '';
+    h += `<div class="rw-b${c}"></div>`;
+  }
+  return h;
+}
+function explodeWall(slot) {
+  const reveal = () => { slot.querySelector('.rw-wall')?.remove(); slot.classList.remove('walled'); retrigger(slot, 'reveal', 700); };
+  if (REDUCED) { reveal(); toast('🎮 Diversão Liberada!', 'gold'); return; }
+  const { r } = rectCenter(slot);
+  const wall = document.createElement('div');
+  wall.className = 'fx-wall';
+  Object.assign(wall.style, { left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px' });
+  wall.innerHTML = wallBlocksHTML(.9);
+  document.body.appendChild(wall);
+  slot.querySelector('.rw-wall')?.style.setProperty('visibility', 'hidden');
+  // 1) rachando e tremendo
+  wall.classList.add('shake');
+  [0, 140, 280, 400].forEach((t, i) => setTimeout(() => {
+    sfx.crack(); buzz(15);
+    wall.querySelectorAll('.rw-b').forEach((b, j) => { if (wallHash(j + i * 7) < .45) b.className = 'rw-b c2'; });
+  }, t));
+  // 2) explosão
+  setTimeout(() => {
+    wall.classList.remove('shake');
+    sfx.boom(); buzz([60, 40, 120]);
+    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    wall.querySelectorAll('.rw-b').forEach(b => {
+      const br = b.getBoundingClientRect();
+      const bx = br.left + br.width / 2 - cx, by = br.top + br.height / 2 - cy;
+      const dist = Math.hypot(bx, by) || 1;
+      const force = 140 + Math.random() * 160;
+      const dx = bx / dist * force + (Math.random() - .5) * 80;
+      const up = -(90 + Math.random() * 140);
+      const rot = (Math.random() - .5) * 720;
+      b.animate([
+        { transform: 'translate(0,0) rotate(0) scale(1)', opacity: 1 },
+        { transform: `translate(${dx * .55}px,${up}px) rotate(${rot * .5}deg) scale(1.1)`, opacity: 1, offset: .35 },
+        { transform: `translate(${dx}px,${up + 520}px) rotate(${rot}deg) scale(.7)`, opacity: 0 }
+      ], { duration: 1100 + Math.random() * 400, easing: 'cubic-bezier(.25,.6,.5,1)', fill: 'forwards' });
+    });
+    burst(cx, cy, { n: 60, colors: ['#6d665c','#8e867a','#45403a','#2b2621'], speed: 10, size: 7, decay: .02 });
+    burst(cx, cy, { n: 50, colors: ['#f5c542','#ffe28a','#ffffff'], speed: 8, size: 5, decay: .014, lift: 3 });
+    setTimeout(reveal, 120);
+    setTimeout(() => { sfx.fanfare(); toast('🎮 Diversão Liberada!', 'gold'); }, 450);
+    setTimeout(() => wall.remove(), 1700);
+  }, 560);
+}
+
+// ── Detecta o que acabou de mudar e anima ──
+function fxAfterRender(blocks, vData) {
+  const today = todayKey();
+  const now = Date.now();
+  const cur = new Set(Object.keys(vData).filter(id => vData[id]?.done));
+  const prev = fxPrevDate === today ? fxPrevDone : null;
+  fxPrevDone = cur; fxPrevDate = today;
+  if (!prev) return; // primeiro render: só registra o estado
+  const fresh = [...cur].filter(id => !prev.has(id) && now - (vData[id]?.ts || 0) < FX_RECENT_MS);
+  if (!fresh.length) return;
+
+  requestAnimationFrame(() => {
+    const blocksEl = document.getElementById('blocks');
+    let aftUnlocked = false, dayJustDone = false;
+
+    fresh.forEach((id, k) => {
+      const el = blocksEl.querySelector(`[data-tid="${id}"]`);
+      const task = blocks.flatMap(b => b.tasks).find(t => t.id === id);
+      if (!el || !task) return;
+      setTimeout(() => {
+        retrigger(el, 'just-done', 700);
+        const { x, y, r } = rectCenter(el);
+        burst(r.left + 36, y, { n: 26, colors: ['#5dbb3a','#8fe05f','#f5c542','#ffffff'], speed: 6 });
+        const f = document.createElement('div');
+        f.className = 'xp-float'; f.textContent = `+${task.xp} XP`;
+        f.style.left = x + 'px'; f.style.top = y + 'px';
+        document.body.appendChild(f); setTimeout(() => f.remove(), 1300);
+        sfx.coin(); buzz(25);
+        retrigger(document.querySelector('.xp-section'), 'xp-hit', 800);
+        retrigger(document.getElementById('doneCount').closest('.stat-card'), 'bump', 500);
+      }, k * 250);
+    });
+
+    // blocos completos
+    for (const b of blocks) {
+      const complete = b.tasks.every(t => cur.has(t.id));
+      const wasComplete = b.tasks.every(t => prev.has(t.id));
+      if (!complete || wasComplete) continue;
+      const sec = blocksEl.querySelector(`[data-block="${b.cls}"]`);
+      retrigger(sec?.querySelector('.block-prog'), 'bump', 500);
+      if (b.reward) {
+        aftUnlocked = true;
+        const slot = document.getElementById('rewardSlot');
+        if (slot) {
+          const r = slot.getBoundingClientRect();
+          const visible = r.top >= 0 && r.bottom <= innerHeight;
+          if (!visible) slot.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' });
+          slot.classList.add('walled');
+          slot.insertAdjacentHTML('beforeend', `<div class="rw-wall">${wallBlocksHTML(.9)}</div>`);
+          setTimeout(() => explodeWall(slot), visible ? 200 : 700);
+        }
+      } else {
+        setTimeout(() => {
+          sfx.block();
+          toast(`${b.icon} ${b.name} completa!`, 'green');
+          const hdr = sec?.querySelector('.block-hdr');
+          if (hdr) { const c = rectCenter(hdr); burst(c.x, c.y, { n: 30, colors: ['#f5c542','#ffe28a','#ffffff'], speed: 7 }); }
+        }, 500);
+      }
     }
-    if (alive && ++frame < 180) requestAnimationFrame(anim);
-    else ctx.clearRect(0,0,canvas.width,canvas.height);
-  })();
+
+    // dia completo
+    const ids = blocks.flatMap(b => b.tasks.map(t => t.id));
+    if (ids.every(id => cur.has(id)) && !ids.every(id => prev.has(id))) {
+      dayJustDone = true;
+      setTimeout(() => {
+        const dd = document.getElementById('dayDone');
+        retrigger(dd, 'drop', 800);
+        dd.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'center' });
+        fireConfetti(); sfx.fanfare(); buzz([80, 60, 80, 60, 200]);
+        toast('🏆 Dia completo!', 'gold');
+      }, aftUnlocked ? 2400 : 900);
+    }
+  });
 }
 
 // ──────────────────────────────────────────────
