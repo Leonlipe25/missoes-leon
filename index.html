@@ -464,6 +464,27 @@ const FIREBASE_CONFIG = {
 };
 
 // ──────────────────────────────────────────────
+// 📲 NOTIFICAÇÕES (ntfy.sh)
+// ──────────────────────────────────────────────
+const NTFY_TOPIC = 'missoes-leon-f3g8k2x9';
+
+function notifyParents(message, title) {
+  // JSON no corpo (sem headers customizados): evita erro de header com emoji/acento
+  // e evita preflight CORS. Best-effort: falha silenciosa.
+  try {
+    fetch('https://ntfy.sh/', {
+      method: 'POST',
+      body: JSON.stringify({
+        topic: NTFY_TOPIC,
+        title: title || 'Missões do Leon',
+        message,
+        tags: ['white_check_mark']
+      })
+    }).catch(() => {});
+  } catch (e) {}
+}
+
+// ──────────────────────────────────────────────
 // 👤 USERS & PIN
 // ──────────────────────────────────────────────
 const USERS = {
@@ -1065,6 +1086,9 @@ document.getElementById('confirmBtn').addEventListener('click', async () => {
     lsSave();
     render();
   }
+
+  const doneTask = BLOCKS_FULL.flatMap(b => b.tasks).find(t => t.id === taskId);
+  if (doneTask) notifyParents(`${currentUser?.name || 'Leon'} completou: ${doneTask.emoji} ${doneTask.name}`);
 
   // Check all done
   const activeIds = getActiveIds(todayKey());

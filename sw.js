@@ -1,4 +1,4 @@
-const CACHE = 'missoes-v3';
+const CACHE = 'missoes-v4';
 const PRECACHE = ['./', './index.html', './icon.svg', './manifest.json'];
 
 self.addEventListener('install', e => {
@@ -16,6 +16,7 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
   if (e.request.url.includes('firebasejs') || e.request.url.includes('googleapis')) return;
   e.respondWith(
     fetch(e.request)
