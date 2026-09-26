@@ -4,30 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Missões do Leon</title>
-<meta name="theme-color" content="#07070f">
+<meta name="theme-color" content="#221e1a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Rajdhani:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;700&family=Press+Start+2P&display=swap">
 <style>
-/* ═══════════ GAMER THEME ═══════════ */
+/* ═══════════ PIXEL / BLOCK THEME ═══════════ */
 :root{
-  --bg:#07070f; --surface:#10121f; --surface-alt:#181b2e;
-  --primary:#00e5ff; --primary-lt:#8b5cf6; --primary-bg:rgba(0,229,255,.10);
-  --success:#39ff88; --success-bg:rgba(57,255,136,.08);
-  --reward:#ffb020; --reward-bg:rgba(255,176,32,.10);
-  --danger:#ff3b6b;
-  --text:#e8ecff; --text-m:#8a90b8; --text-l:#565c82;
-  --border:#252a47;
-  --glow-c:0 0 12px rgba(0,229,255,.45);
-  --glow-g:0 0 14px rgba(57,255,136,.45);
-  --glow-y:0 0 16px rgba(255,176,32,.5);
-  --sh:0 4px 18px rgba(0,0,0,.45); --sh-lg:0 8px 28px rgba(0,0,0,.6);
-  --cut:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
-  --cut-s:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px);
-  --f-hud:'Chakra Petch',system-ui,sans-serif;
+  --bg:#221e1a;
+  --panel:#3b352e; --panel-lt:#5c5347; --panel-dk:#1a1714;
+  --slot:#26221d; --slot-lt:#4a4238; --slot-dk:#110f0d;
+  --surface:#3b352e; --surface-alt:#2d2823;
+  --primary:#5dbb3a; --primary-dk:#3b7f22; --primary-lt:#8fe05f; --primary-bg:rgba(93,187,58,.15);
+  --success:#7ee04c; --success-bg:rgba(126,224,76,.14);
+  --reward:#f5c542; --reward-dk:#b88a14; --reward-bg:rgba(245,197,66,.14);
+  --diamond:#4fe3d6;
+  --danger:#e04848;
+  --text:#f3eee4; --text-m:#bfb3a1; --text-l:#7f7466;
+  --border:#000;
+  --px:'Press Start 2P',monospace;
+  --bevel:inset 3px 3px 0 var(--panel-lt),inset -3px -3px 0 var(--panel-dk);
+  --inset:inset 3px 3px 0 var(--slot-dk),inset -3px -3px 0 var(--slot-lt);
+  --drop:4px 4px 0 rgba(0,0,0,.55);
   color-scheme:dark;
 }
 
@@ -35,258 +36,204 @@
 [hidden]{display:none!important}
 html{height:100%;background:var(--bg)}
 body{
-  margin:0 auto; color:var(--text);
-  font-family:'Rajdhani',system-ui,sans-serif; font-weight:600;
+  margin:0 auto;color:var(--text);
+  font-family:'Pixelify Sans',monospace;font-weight:500;font-size:16px;
   padding:env(safe-area-inset-top,0) 16px env(safe-area-inset-bottom,0);
-  max-width:480px; min-height:100%;
-  background:
-    radial-gradient(ellipse 80% 40% at 50% -5%,rgba(139,92,246,.28),transparent 70%),
-    radial-gradient(ellipse 60% 30% at 100% 100%,rgba(0,229,255,.12),transparent 70%),
-    var(--bg);
-  background-attachment:fixed;
+  max-width:480px;min-height:100%;
+  background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2216%22%20height%3D%2216%22%20shape-rendering%3D%22crispEdges%22%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%221%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%222%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%223%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%224%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%225%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%226%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%227%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%228%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%229%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2210%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2211%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2212%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2213%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2214%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2215%22%20y%3D%220%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%220%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%221%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%222%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%223%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%224%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%225%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%226%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%227%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%228%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%229%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2210%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2211%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2212%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2213%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2214%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2215%22%20y%3D%221%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%220%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%221%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%222%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%223%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%224%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%225%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%226%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%227%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%228%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%229%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2210%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2211%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2212%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%2213%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2214%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2215%22%20y%3D%222%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%220%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%221%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%222%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%224%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%225%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%226%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%227%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%228%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%229%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2210%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2211%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2212%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2213%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2214%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2215%22%20y%3D%223%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%220%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%221%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%222%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%223%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%225%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%226%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%227%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%228%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%229%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2210%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2211%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2212%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2213%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2214%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%2215%22%20y%3D%224%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%220%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%221%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%222%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%223%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%224%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%225%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%226%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%227%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%228%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%229%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2210%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2211%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%2212%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2213%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2214%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2215%22%20y%3D%225%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%220%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%221%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%222%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%223%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%224%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%225%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%226%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%227%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%228%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%229%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2210%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2211%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2212%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2213%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2214%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%2215%22%20y%3D%226%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%220%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%221%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%222%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%223%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%224%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%225%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%226%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%227%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%228%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%229%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2210%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2211%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%2212%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2213%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2214%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2215%22%20y%3D%227%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%220%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%221%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%222%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%223%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%224%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%225%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%226%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%227%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%228%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%229%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%2210%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2211%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2212%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2213%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2214%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2215%22%20y%3D%228%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%220%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%221%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%222%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%223%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%224%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%225%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%226%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%227%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%228%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%229%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%2210%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2211%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2212%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%2213%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2214%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2215%22%20y%3D%229%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%220%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%221%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%222%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%223%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%224%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%225%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%226%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%227%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%228%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%229%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2210%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2211%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%2212%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%2213%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2214%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2215%22%20y%3D%2210%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%220%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%221%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%222%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%223%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%224%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%225%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%226%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%227%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%228%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%229%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2210%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2211%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2212%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2213%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2214%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2215%22%20y%3D%2211%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%220%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%221%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%222%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%223%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%224%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%225%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%226%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%227%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%228%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%229%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2210%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2211%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2212%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2213%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2214%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2215%22%20y%3D%2212%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%220%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%221%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%222%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%223%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%224%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%225%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%226%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%227%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%228%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%229%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2210%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2211%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2212%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2213%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2214%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2215%22%20y%3D%2213%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%220%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%221%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%222%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%223%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%224%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%225%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%226%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%227%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%228%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%229%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2210%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2211%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%2212%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%2213%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%2214%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2215%22%20y%3D%2214%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%220%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%221%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%222%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%223%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%224%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%2327231e%22/%3E%3Crect%20x%3D%225%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%226%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%227%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%228%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3Crect%20x%3D%229%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2210%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2211%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23332d27%22/%3E%3Crect%20x%3D%2212%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232f2a24%22/%3E%3Crect%20x%3D%2213%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23242019%22/%3E%3Crect%20x%3D%2214%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%23393229%22/%3E%3Crect%20x%3D%2215%22%20y%3D%2215%22%20width%3D%221%22%20height%3D%221%22%20fill%3D%22%232b2621%22/%3E%3C/svg%3E");background-size:64px 64px;background-color:var(--bg);
+  image-rendering:pixelated;
 }
-body::before{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
-  background-image:
-    linear-gradient(rgba(0,229,255,.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,229,255,.05) 1px,transparent 1px);
-  background-size:32px 32px;
-  mask-image:linear-gradient(to bottom,#000 0%,transparent 55%);
-  -webkit-mask-image:linear-gradient(to bottom,#000 0%,transparent 55%);
+button{font-family:'Pixelify Sans',monospace}
+.px{font-family:var(--px)}
+
+/* common block look */
+.login-card,.stat-card,.xp-section,.task,.reward-slot,.day-done,.modal-box,.pin-key,
+.nav-arrow,.today-btn,.logout-btn,.notif-btn,.user-chip,.btn,.block-prog,.parent-badge,.history-badge{
+  border:3px solid var(--border);border-radius:0;
 }
-button{font-family:var(--f-hud)}
 
 /* ── LOGIN ── */
 .login-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:40px 16px}
-.login-title{
-  font-family:var(--f-hud);font-size:2rem;font-weight:700;text-align:center;
-  text-transform:uppercase;letter-spacing:.04em;line-height:1.1;
-  background:linear-gradient(90deg,var(--primary),var(--primary-lt));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:drop-shadow(0 0 10px rgba(0,229,255,.35));
-}
-.login-sub{font-family:var(--f-hud);font-size:.8rem;color:var(--text-m);text-align:center;margin-top:6px;text-transform:uppercase;letter-spacing:.3em}
-.login-cards{display:flex;flex-direction:column;gap:12px;width:100%;max-width:340px}
-.login-card{
-  display:flex;align-items:center;gap:16px;cursor:pointer;
-  background:linear-gradient(135deg,var(--surface-alt),var(--surface));
-  border:1px solid var(--border);clip-path:var(--cut);
-  padding:16px 20px;transition:all .2s;position:relative;
-}
-.login-card::after{content:"▶";position:absolute;right:18px;color:var(--text-l);font-size:.8rem;transition:all .2s}
-.login-card:hover,.login-card:focus-visible{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary),var(--glow-c)}
-.login-card:hover::after{color:var(--primary);transform:translateX(3px)}
-.login-card:active{transform:scale(.97)}
-.login-avatar{width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;clip-path:var(--cut-s)}
-.login-avatar.leon{background:linear-gradient(135deg,rgba(0,229,255,.25),rgba(139,92,246,.25))}
-.login-avatar.pai{background:rgba(57,255,136,.15)}
-.login-avatar.mae{background:rgba(255,176,32,.15)}
-.login-name{font-family:var(--f-hud);font-size:1.15rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-.login-role{font-size:.85rem;color:var(--text-m);margin-top:1px}
+.login-title{font-family:var(--px);font-size:1.25rem;line-height:1.5;text-align:center;color:var(--reward);text-shadow:3px 3px 0 #5a3c00,5px 5px 0 rgba(0,0,0,.6)}
+.login-sub{font-family:var(--px);font-size:.6rem;color:var(--text-m);text-align:center;margin-top:12px;text-shadow:2px 2px 0 #000;animation:blink 1.4s steps(2) infinite}
+.login-cards{display:flex;flex-direction:column;gap:14px;width:100%;max-width:340px}
+.login-card{display:flex;align-items:center;gap:16px;cursor:pointer;background:var(--panel);box-shadow:var(--bevel),var(--drop);padding:14px 18px;position:relative;transition:transform .05s}
+.login-card::after{content:"▶";position:absolute;right:16px;color:var(--text-l);font-family:var(--px);font-size:.6rem}
+.login-card:hover,.login-card:focus-visible{background:#4a4238;outline:3px solid var(--reward);outline-offset:0}
+.login-card:hover::after{color:var(--reward)}
+.login-card:active{transform:translate(2px,2px);box-shadow:var(--bevel)}
+.login-avatar{width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;background:var(--slot);box-shadow:var(--inset);border:3px solid #000}
+.login-avatar.leon{background:#23402a}
+.login-avatar.pai{background:#1f3a44}
+.login-avatar.mae{background:#4a3a1c}
+.login-name{font-family:var(--px);font-size:.8rem;text-shadow:2px 2px 0 #000}
+.login-role{font-size:.95rem;color:var(--text-m);margin-top:6px}
 
 /* ── PIN ── */
 .pin-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px 16px}
-.pin-back{font-size:.8rem;color:var(--text-m);background:none;border:none;cursor:pointer;font-weight:600;text-transform:uppercase;letter-spacing:.1em}
-.pin-back:hover{color:var(--primary)}
+.pin-back{font-family:var(--px);font-size:.6rem;color:var(--text-m);background:none;border:none;cursor:pointer;text-shadow:2px 2px 0 #000}
+.pin-back:hover{color:var(--reward)}
 .pin-user{text-align:center}
-.pin-user .login-avatar{margin:0 auto 10px;width:72px;height:72px;font-size:2.2rem;box-shadow:var(--glow-c)}
-.pin-user-name{font-family:var(--f-hud);font-size:1.3rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
-.pin-label{font-size:.8rem;color:var(--text-m);text-align:center;margin-top:-8px;text-transform:uppercase;letter-spacing:.2em}
-.pin-dots{display:flex;gap:14px;justify-content:center}
-.pin-dot{width:16px;height:16px;transform:rotate(45deg);border:2px solid var(--border);background:transparent;transition:all .15s}
-.pin-dot.filled{background:var(--primary);border-color:var(--primary);box-shadow:var(--glow-c)}
-.pin-dot.error{background:var(--danger);border-color:var(--danger);animation:shake .4s}
-@keyframes shake{0%,100%{transform:rotate(45deg) translateX(0)}25%{transform:rotate(45deg) translateX(-6px)}75%{transform:rotate(45deg) translateX(6px)}}
-.pin-pad{display:grid;grid-template-columns:repeat(3,76px);gap:10px;justify-content:center}
-.pin-key{
-  width:76px;height:58px;border:1px solid var(--border);clip-path:var(--cut-s);
-  background:var(--surface);color:var(--text);
-  font-size:1.4rem;font-weight:700;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;transition:all .1s;
-}
-.pin-key:active{transform:scale(.93);background:var(--primary-bg);border-color:var(--primary);color:var(--primary)}
+.pin-user .login-avatar{margin:0 auto 12px;width:72px;height:72px;font-size:2.2rem}
+.pin-user-name{font-family:var(--px);font-size:.95rem;text-shadow:2px 2px 0 #000}
+.pin-label{font-size:1rem;color:var(--text-m);text-align:center;margin-top:-4px}
+.pin-dots{display:flex;gap:12px;justify-content:center}
+.pin-dot{width:18px;height:18px;border:3px solid #000;background:var(--slot);box-shadow:inset 2px 2px 0 var(--slot-dk)}
+.pin-dot.filled{background:var(--primary);box-shadow:inset -3px -3px 0 var(--primary-dk),inset 3px 3px 0 var(--primary-lt)}
+.pin-dot.error{background:var(--danger);box-shadow:none;animation:shake .4s steps(4)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.pin-pad{display:grid;grid-template-columns:repeat(3,76px);gap:8px;justify-content:center}
+.pin-key{width:76px;height:58px;background:#6f6f6f;color:#fff;box-shadow:inset 3px 3px 0 #a3a3a3,inset -3px -3px 0 #414141;font-family:var(--px);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;text-shadow:2px 2px 0 #333}
+.pin-key:hover{background:#7d8fa8;box-shadow:inset 3px 3px 0 #b3c2d8,inset -3px -3px 0 #4b5a70}
+.pin-key:active{box-shadow:inset -3px -3px 0 #a3a3a3,inset 3px 3px 0 #414141;transform:translateY(1px)}
 .pin-key.empty{visibility:hidden}
-.pin-key.del{font-size:1.1rem;color:var(--text-m)}
-.pin-error{font-size:.85rem;color:var(--danger);min-height:20px;text-align:center}
-.pin-confirm-row{display:flex;gap:10px;width:100%;max-width:240px}
-.pin-confirm-row .btn{font-size:.85rem;padding:10px}
+.pin-key.del{font-size:1.1rem}
+.pin-error{font-size:.95rem;color:var(--danger);min-height:20px;text-align:center;text-shadow:1px 1px 0 #000}
+.pin-confirm-row{display:flex;gap:10px;width:100%;max-width:260px}
+.pin-confirm-row .btn{font-size:.9rem;padding:10px}
 
 /* ── HEADER ── */
-.header{text-align:center;padding:22px 0 4px;position:relative}
-.header h1{
-  font-family:var(--f-hud);font-size:1.55rem;font-weight:700;margin:0;
-  text-transform:uppercase;letter-spacing:.06em;
-  background:linear-gradient(90deg,var(--primary),var(--primary-lt));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:drop-shadow(0 0 8px rgba(0,229,255,.35));
+.header{text-align:center;padding:22px 0 4px}
+.header h1{font-family:var(--px);font-size:1rem;line-height:1.5;margin:0;color:var(--reward);text-shadow:3px 3px 0 #5a3c00,4px 4px 0 rgba(0,0,0,.6)}
+.date-nav{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px}
+.nav-arrow,.logout-btn,.notif-btn,.today-btn{
+  background:#6f6f6f;color:#fff;cursor:pointer;
+  box-shadow:inset 2px 2px 0 #a3a3a3,inset -2px -2px 0 #414141;
+  text-shadow:1px 1px 0 #333;
 }
-.date-nav{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px}
-.nav-arrow{
-  background:var(--surface);border:1px solid var(--border);color:var(--text-m);
-  cursor:pointer;font-size:.75rem;padding:5px 11px;clip-path:var(--cut-s);transition:all .15s;
-}
-.nav-arrow:hover{color:var(--primary);border-color:var(--primary)}
-.nav-arrow:active{transform:scale(.93)}
-.nav-arrow:disabled{opacity:.25;cursor:default;pointer-events:none}
-.date-label{font-family:var(--f-hud);font-size:.85rem;color:var(--text);font-weight:600;min-width:170px;text-align:center;text-transform:uppercase;letter-spacing:.06em}
-.today-btn{font-size:.7rem;font-weight:700;color:#07070f;background:var(--primary);border:none;clip-path:var(--cut-s);padding:5px 12px;cursor:pointer;margin-left:4px;text-transform:uppercase;box-shadow:var(--glow-c)}
-.today-btn:active{transform:scale(.93)}
+.nav-arrow{font-size:.75rem;padding:5px 11px}
+.nav-arrow:hover,.logout-btn:hover,.notif-btn:hover{background:#7d8fa8}
+.nav-arrow:active,.logout-btn:active,.notif-btn:active,.today-btn:active{box-shadow:inset -2px -2px 0 #a3a3a3,inset 2px 2px 0 #414141}
+.nav-arrow:disabled{opacity:.35;cursor:default;pointer-events:none}
+.date-label{font-size:1.05rem;color:var(--text);min-width:170px;text-align:center;text-shadow:2px 2px 0 #000}
+.today-btn{font-family:var(--px);font-size:.5rem;padding:6px 10px;margin-left:4px;background:var(--primary);box-shadow:inset 2px 2px 0 var(--primary-lt),inset -2px -2px 0 var(--primary-dk)}
 
-.sync-row{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:6px}
-.sync-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.sync-dot.online{background:var(--success);box-shadow:0 0 8px var(--success);animation:blink 2s infinite}
+.sync-row{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px}
+.sync-dot{width:8px;height:8px;flex-shrink:0}
+.sync-dot.online{background:var(--success);animation:blink 1.6s steps(2) infinite}
 .sync-dot.offline{background:var(--text-l)}
-@keyframes blink{50%{opacity:.4}}
-.sync-label{font-size:.7rem;color:var(--text-l);text-transform:uppercase;letter-spacing:.15em}
+@keyframes blink{50%{opacity:.35}}
+.sync-label{font-size:.85rem;color:var(--text-m);text-shadow:1px 1px 0 #000}
 
 .user-bar{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px}
-.user-chip{display:inline-flex;align-items:center;gap:6px;background:var(--surface-alt);border:1px solid var(--border);padding:3px 12px 3px 4px;clip-path:var(--cut-s);font-family:var(--f-hud);font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
-.user-chip .chip-avatar{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:.8rem}
-.logout-btn,.notif-btn{font-size:.7rem;color:var(--text-m);background:var(--surface);border:1px solid var(--border);clip-path:var(--cut-s);padding:5px 10px;cursor:pointer;font-weight:600;transition:all .15s;text-transform:uppercase;letter-spacing:.05em;line-height:1}
-.notif-btn{font-size:.85rem;padding:4px 8px}
-.logout-btn:hover,.notif-btn:hover{border-color:var(--primary);color:var(--primary)}
-.notif-btn.active{background:var(--primary-bg);border-color:var(--primary)}
+.user-chip{display:inline-flex;align-items:center;gap:6px;background:var(--slot);box-shadow:var(--inset);padding:4px 12px 4px 6px;font-size:1rem}
+.user-chip .chip-avatar{width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.logout-btn{font-size:.95rem;padding:4px 10px}
+.notif-btn{font-size:.85rem;padding:4px 8px;line-height:1}
+.notif-btn.active{background:var(--primary);box-shadow:inset 2px 2px 0 var(--primary-lt),inset -2px -2px 0 var(--primary-dk)}
 
-.parent-badge,.history-badge{display:inline-flex;align-items:center;gap:4px;font-family:var(--f-hud);font-size:.68rem;font-weight:700;padding:4px 12px;margin-top:8px;text-transform:uppercase;letter-spacing:.1em;clip-path:var(--cut-s)}
-.parent-badge{background:var(--reward-bg);color:var(--reward);border:1px solid rgba(255,176,32,.4)}
-.history-badge{background:var(--surface-alt);color:var(--text-m);border:1px solid var(--border)}
+.parent-badge,.history-badge{display:inline-flex;align-items:center;gap:6px;font-size:.95rem;padding:3px 10px;margin-top:10px}
+.parent-badge{background:var(--reward);color:#2a1d00;box-shadow:inset 2px 2px 0 #ffe28a,inset -2px -2px 0 var(--reward-dk)}
+.history-badge{background:var(--slot);color:var(--text-m);box-shadow:var(--inset)}
 
 /* ── MINI CALENDAR ── */
-.mini-cal{display:flex;gap:10px;justify-content:center;margin-top:14px}
+.mini-cal{display:flex;gap:8px;justify-content:center;margin-top:14px}
 .cal-day{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
-.cal-day:active{transform:scale(.9)}
-.cal-lbl{font-size:.6rem;color:var(--text-l);font-weight:700;text-transform:uppercase}
-.cal-num{font-family:var(--f-hud);font-size:.65rem;color:var(--text-m);font-weight:600}
-.cal-dot{width:13px;height:13px;transform:rotate(45deg);border:2px solid var(--border);background:transparent}
-.cal-dot.complete{background:var(--success);border-color:var(--success);box-shadow:0 0 8px rgba(57,255,136,.6)}
-.cal-dot.partial{background:var(--reward);border-color:var(--reward)}
-.cal-dot.current{border-color:var(--primary);box-shadow:var(--glow-c)}
-.cal-dot.current.complete{border-color:var(--success)}
+.cal-day:active{transform:translateY(1px)}
+.cal-lbl{font-family:var(--px);font-size:.45rem;color:var(--text-m);text-shadow:1px 1px 0 #000}
+.cal-num{font-size:.8rem;color:var(--text-m)}
+.cal-dot{width:20px;height:20px;border:3px solid #000;background:var(--slot);box-shadow:inset 2px 2px 0 var(--slot-dk)}
+.cal-dot.complete{background:var(--primary);box-shadow:inset 2px 2px 0 var(--primary-lt),inset -2px -2px 0 var(--primary-dk)}
+.cal-dot.partial{background:var(--reward);box-shadow:inset 2px 2px 0 #ffe28a,inset -2px -2px 0 var(--reward-dk)}
+.cal-dot.current{outline:2px solid #fff;outline-offset:1px}
 
-/* ── HUD STATS ── */
+/* ── STATS ── */
 .stats{display:flex;gap:8px;margin-top:18px}
-.stat-card{
-  flex:1;text-align:center;padding:14px 8px 12px;position:relative;
-  background:linear-gradient(180deg,var(--surface-alt),var(--surface));
-  border:1px solid var(--border);clip-path:var(--cut);
-}
-.stat-card::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--accent,var(--primary));box-shadow:0 0 10px var(--accent,var(--primary))}
-.stat-card:nth-child(1){--accent:var(--reward)}
-.stat-card:nth-child(2){--accent:var(--primary)}
-.stat-card:nth-child(3){--accent:var(--success)}
-.stat-icon{font-size:1.3rem}
-.stat-value{font-family:var(--f-hud);font-size:1.3rem;font-weight:700;margin-top:4px;line-height:1.1}
-.stat-label{font-size:.68rem;color:var(--text-m);text-transform:uppercase;letter-spacing:.12em;margin-top:3px}
-.streak-val{color:var(--reward);text-shadow:0 0 12px rgba(255,176,32,.6)}
-.rank-val{color:var(--primary);text-shadow:0 0 12px rgba(0,229,255,.5);font-size:1.05rem}
-#doneCount{color:var(--success);text-shadow:0 0 12px rgba(57,255,136,.5)}
+.stat-card{flex:1;text-align:center;padding:12px 6px 10px;background:var(--panel);box-shadow:var(--bevel),var(--drop)}
+.stat-icon{font-size:1.4rem}
+.stat-value{font-family:var(--px);font-size:.95rem;margin-top:8px;line-height:1.3;text-shadow:2px 2px 0 #000}
+.stat-label{font-size:.85rem;color:var(--text-m);margin-top:6px;line-height:1.1}
+.streak-val{color:#ff8a3d}
+.rank-val{color:var(--diamond);font-size:.6rem}
+#doneCount{color:var(--success)}
 
 /* ── XP BAR ── */
-.xp-section{margin-top:12px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);clip-path:var(--cut)}
-.xp-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-.xp-lbl{font-family:var(--f-hud);font-size:.78rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.15em}
-.xp-count{font-family:var(--f-hud);font-size:.8rem;font-weight:600;color:var(--text)}
-.xp-track{height:14px;background:#0a0b16;border:1px solid var(--border);position:relative;overflow:hidden;clip-path:var(--cut-s)}
-.xp-track::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 18px,rgba(7,7,15,.9) 18px 20px);pointer-events:none}
-.xp-fill{
-  height:100%;position:relative;overflow:hidden;
-  background:linear-gradient(90deg,var(--primary),var(--primary-lt));
-  box-shadow:0 0 14px rgba(0,229,255,.6);
-  transition:width .6s cubic-bezier(.4,0,.2,1);
-}
-.xp-fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-100%);animation:shine 2.4s infinite}
-@keyframes shine{to{transform:translateX(100%)}}
+.xp-section{margin-top:14px;padding:12px 14px;background:var(--panel);box-shadow:var(--bevel),var(--drop)}
+.xp-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.xp-lbl{font-family:var(--px);font-size:.6rem;color:var(--success);text-shadow:2px 2px 0 #000}
+.xp-count{font-family:var(--px);font-size:.6rem;color:var(--text);text-shadow:2px 2px 0 #000}
+.xp-track{height:18px;background:#141210;border:3px solid #000;position:relative;overflow:hidden}
+.xp-track::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 20px,#000 20px 23px);pointer-events:none}
+.xp-fill{height:100%;background:linear-gradient(180deg,var(--primary-lt) 0 30%,var(--primary) 30% 70%,var(--primary-dk) 70%);transition:width .6s steps(12)}
 
 /* ── BLOCKS ── */
 .block{margin-top:22px}
-.block-hdr{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:0 2px}
-.block-ico{font-size:1.05rem;width:34px;height:34px;display:flex;align-items:center;justify-content:center;flex-shrink:0;clip-path:var(--cut-s)}
-.block-ico.morning{background:rgba(255,176,32,.15)}
-.block-ico.afternoon{background:rgba(0,229,255,.12)}
-.block-ico.night{background:rgba(139,92,246,.18)}
-.block-ttl{font-family:var(--f-hud);font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--text)}
-.block-hdr::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);order:2}
-.block-prog{order:3;font-family:var(--f-hud);font-size:.75rem;font-weight:700;color:var(--text-m);background:var(--surface-alt);border:1px solid var(--border);padding:2px 10px;clip-path:var(--cut-s)}
-.block-prog.done{background:var(--success-bg);color:var(--success);border-color:rgba(57,255,136,.4)}
+.block-hdr{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.block-ico{font-size:1.1rem;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:3px solid #000}
+.block-ico.morning{background:#8a6a1e;box-shadow:inset 3px 3px 0 #c2982f,inset -3px -3px 0 #5a430f}
+.block-ico.afternoon{background:#3b7f22;box-shadow:inset 3px 3px 0 #5dbb3a,inset -3px -3px 0 #24501a}
+.block-ico.night{background:#2b3a6b;box-shadow:inset 3px 3px 0 #45599e,inset -3px -3px 0 #1a2344}
+.block-ttl{font-family:var(--px);font-size:.75rem;color:var(--text);text-shadow:2px 2px 0 #000}
+.block-hdr::after{content:"";flex:1;height:3px;background:repeating-linear-gradient(90deg,var(--text-l) 0 6px,transparent 6px 12px);order:2}
+.block-prog{order:3;font-family:var(--px);font-size:.55rem;color:var(--text-m);background:var(--slot);box-shadow:var(--inset);padding:6px 8px}
+.block-prog.done{background:var(--primary);color:#fff;box-shadow:inset 2px 2px 0 var(--primary-lt),inset -2px -2px 0 var(--primary-dk);text-shadow:1px 1px 0 #000}
 
 .task-list{display:flex;flex-direction:column;gap:8px}
+.task{display:flex;align-items:center;gap:12px;background:var(--panel);box-shadow:var(--bevel),var(--drop);padding:10px 12px;-webkit-user-select:none;user-select:none}
+.task.done{background:#2f4a22;box-shadow:inset 3px 3px 0 #4f7a38,inset -3px -3px 0 #1b2c13,var(--drop)}
+.task.locked{filter:grayscale(1) brightness(.6);pointer-events:none}
 
-.task{
-  display:flex;align-items:center;gap:12px;position:relative;
-  background:linear-gradient(90deg,var(--surface-alt),var(--surface));
-  border:1px solid var(--border);clip-path:var(--cut);
-  padding:11px 14px 11px 16px;
-  -webkit-user-select:none;user-select:none;transition:all .25s;
-}
-.task::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--border);transition:all .25s}
-.task.done{background:linear-gradient(90deg,rgba(57,255,136,.13),var(--surface));border-color:rgba(57,255,136,.35)}
-.task.done::before{background:var(--success);box-shadow:0 0 10px var(--success)}
-.task.locked{opacity:.38;filter:grayscale(.8);pointer-events:none}
-
-.task-thumb{width:46px;height:46px;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer;clip-path:var(--cut-s)}
-.task-thumb img{width:100%;height:100%;object-fit:cover}
-.task-thumb.empty{background:rgba(0,229,255,.06);border:1px dashed rgba(0,229,255,.5);color:var(--primary);font-size:1.2rem;transition:all .2s;animation:ready 2.2s infinite}
-@keyframes ready{50%{box-shadow:inset 0 0 12px rgba(0,229,255,.35)}}
-.task-thumb.empty:active{transform:scale(.92)}
+.task-thumb{width:50px;height:50px;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer;border:3px solid #000;background:var(--slot);box-shadow:var(--inset)}
+.task-thumb img{width:100%;height:100%;object-fit:cover;image-rendering:auto}
+.task-thumb.empty{color:var(--text);font-size:1.3rem}
+.task-thumb.empty:not(.disabled){animation:ready 1.2s steps(2) infinite}
+@keyframes ready{50%{background:#4a4238}}
+.task-thumb.empty:active{transform:translateY(1px)}
 .task.done .task-thumb.empty{display:none}
-.task.done .task-thumb.has-photo{border:2px solid var(--success)}
-.task-thumb.disabled{cursor:default;opacity:.7;animation:none;border-color:var(--border);color:var(--text-l);background:transparent}
-.task-thumb.disabled:active{transform:none}
+.task.done .task-thumb.has-photo{border-color:var(--success)}
+.task-thumb.disabled{cursor:default;opacity:.7}
 
 .task-info{flex:1;min-width:0}
-.task-name{font-size:1rem;font-weight:700;line-height:1.15;transition:color .2s}
+.task-name{font-size:1.1rem;line-height:1.15;text-shadow:2px 2px 0 #000}
 .task.done .task-name{color:var(--success)}
-.task-xp{display:inline-block;font-family:var(--f-hud);font-size:.68rem;font-weight:700;color:var(--reward);margin-top:3px;letter-spacing:.05em}
+.task-xp{display:inline-block;font-family:var(--px);font-size:.5rem;color:var(--reward);margin-top:6px;text-shadow:1px 1px 0 #000}
 .task.done .task-xp{color:var(--success)}
-.task.done .task-xp::after{content:" ✔ COLETADO"}
-.task-emoji{font-size:1.25rem;flex-shrink:0}
-.task-ts{font-size:.72rem;color:var(--text-m);margin-top:2px}
-.task-who{font-size:.68rem;color:var(--text-l);margin-top:1px}
-.study-dur{font-family:var(--f-hud);font-size:.7rem;color:var(--primary);font-weight:700;margin-top:2px}
+.task.done .task-xp::after{content:" ✔ OK!"}
+.task-emoji{font-size:1.4rem;flex-shrink:0}
+.task-ts{font-size:.85rem;color:var(--text-m);margin-top:3px}
+.task-who{font-size:.8rem;color:var(--text-l);margin-top:1px}
+.study-dur{font-family:var(--px);font-size:.5rem;color:var(--diamond);margin-top:4px}
 
 /* ── REWARD ── */
-.reward-slot{margin-top:10px;padding:18px 16px;text-align:center;transition:all .4s;border:1px dashed var(--border);background:var(--surface);clip-path:var(--cut)}
-.rw-title{font-family:var(--f-hud);text-transform:uppercase;letter-spacing:.1em}
-.reward-slot.locked .rw-title{color:var(--text-l);font-size:1rem;font-weight:700}
-.reward-slot.locked .rw-sub{color:var(--text-l);font-size:.85rem;margin-top:4px}
-.reward-slot.unlocked{border:1px solid var(--reward);background:linear-gradient(135deg,rgba(255,176,32,.18),rgba(139,92,246,.15));animation:pulse 1.8s infinite}
-.reward-slot.unlocked .rw-title{color:var(--reward);font-size:1.25rem;font-weight:700;text-shadow:0 0 14px rgba(255,176,32,.7)}
-.reward-slot.unlocked .rw-sub{color:var(--text);font-size:.9rem;margin-top:4px}
-@keyframes pulse{0%,100%{box-shadow:inset 0 0 10px rgba(255,176,32,.2)}50%{box-shadow:inset 0 0 30px rgba(255,176,32,.45)}}
+.reward-slot{margin-top:10px;padding:16px 12px;text-align:center;background:var(--slot);box-shadow:var(--inset)}
+.rw-title{font-family:var(--px);line-height:1.5}
+.reward-slot.locked .rw-title{color:var(--text-l);font-size:.7rem}
+.reward-slot.locked .rw-sub{color:var(--text-l);font-size:1rem;margin-top:6px}
+.reward-slot.unlocked{background:var(--reward);box-shadow:inset 4px 4px 0 #ffe28a,inset -4px -4px 0 var(--reward-dk),var(--drop);animation:bounce 1s steps(2) infinite}
+.reward-slot.unlocked .rw-title{color:#fff;font-size:.8rem;text-shadow:2px 2px 0 #6b4a00}
+.reward-slot.unlocked .rw-sub{color:#3a2800;font-size:1.05rem;margin-top:6px}
+@keyframes bounce{50%{transform:translateY(-3px)}}
 
 /* ── DAY DONE ── */
-.day-done{margin:24px 0 8px;text-align:center;padding:26px 20px;clip-path:var(--cut);border:1px solid var(--success);background:radial-gradient(ellipse at top,rgba(57,255,136,.25),transparent 70%),var(--surface)}
-.day-done[hidden]{display:none!important}
-.day-done .big{font-size:2.8rem;filter:drop-shadow(0 0 14px rgba(255,176,32,.7))}
-.day-done h2{font-family:var(--f-hud);font-size:1.35rem;font-weight:700;color:var(--success);margin:8px 0 4px;text-transform:uppercase;letter-spacing:.1em;text-shadow:0 0 14px rgba(57,255,136,.6)}
-.day-done p{font-size:.95rem;color:var(--text-m);margin:0}
+.day-done{margin:24px 0 8px;text-align:center;padding:22px 16px;background:#2f4a22;box-shadow:inset 4px 4px 0 #4f7a38,inset -4px -4px 0 #1b2c13,var(--drop)}
+.day-done .big{font-size:2.8rem}
+.day-done h2{font-family:var(--px);font-size:.9rem;line-height:1.5;color:var(--reward);margin:10px 0 8px;text-shadow:2px 2px 0 #000}
+.day-done p{font-size:1.05rem;color:var(--text);margin:0}
 
 /* ── MODAL ── */
-.modal{position:fixed;inset:0;background:rgba(3,3,10,.85);backdrop-filter:blur(4px);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px}
-.modal[hidden]{display:none!important}
-.modal-box{background:var(--surface);border:1px solid var(--primary);box-shadow:var(--glow-c);clip-path:var(--cut);padding:20px;max-width:360px;width:100%;text-align:center}
-.modal-box img{width:100%;max-height:300px;object-fit:cover;clip-path:var(--cut-s)}
-.modal-box h3{font-family:var(--f-hud);font-size:1.05rem;font-weight:700;margin:12px 0 4px;text-transform:uppercase;letter-spacing:.06em}
-.modal-box p{font-size:.9rem;color:var(--text-m);margin:0 0 16px}
+.modal{position:fixed;inset:0;background:rgba(10,8,6,.85);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px}
+.modal-box{background:var(--panel);box-shadow:var(--bevel),6px 6px 0 rgba(0,0,0,.6);padding:18px;max-width:360px;width:100%;text-align:center}
+.modal-box img{width:100%;max-height:300px;object-fit:cover;border:3px solid #000}
+.modal-box h3{font-family:var(--px);font-size:.75rem;line-height:1.5;margin:12px 0 6px;text-shadow:2px 2px 0 #000}
+.modal-box p{font-size:1rem;color:var(--text-m);margin:0 0 16px}
 .modal-actions{display:flex;gap:10px}
-.btn{flex:1;padding:12px;border:none;clip-path:var(--cut-s);font-size:.9rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.05em}
-.btn-cancel{background:var(--surface-alt);color:var(--text-m)}
-.btn-confirm{background:linear-gradient(90deg,var(--primary),var(--primary-lt));color:#07070f}
-.btn:active{transform:scale(.96)}
+.btn{flex:1;padding:12px;font-size:1.05rem;cursor:pointer;color:#fff;text-shadow:1px 1px 0 #000}
+.btn-cancel{background:#6f6f6f;box-shadow:inset 3px 3px 0 #a3a3a3,inset -3px -3px 0 #414141}
+.btn-confirm{background:var(--primary);box-shadow:inset 3px 3px 0 var(--primary-lt),inset -3px -3px 0 var(--primary-dk)}
+.btn:active{transform:translateY(2px)}
 
 .viewer{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}
-.viewer[hidden]{display:none!important}
-.viewer img{max-width:100%;max-height:90vh;object-fit:contain}
-.viewer .close{position:absolute;top:16px;right:16px;width:42px;height:42px;background:rgba(255,255,255,.12);color:#fff;border:none;clip-path:var(--cut-s);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.viewer img{max-width:100%;max-height:90vh;object-fit:contain;image-rendering:auto;border:3px solid #000}
+.viewer .close{position:absolute;top:16px;right:16px;width:44px;height:44px;background:var(--danger);color:#fff;border:3px solid #000;box-shadow:inset 3px 3px 0 #ff8a8a,inset -3px -3px 0 #8a1f1f;font-family:var(--px);font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
 .reset-row{text-align:center;margin:18px 0 32px}
-.reset-btn{font-size:.72rem;color:var(--text-l);background:none;border:none;cursor:pointer;text-transform:uppercase;letter-spacing:.1em;padding:8px}
+.reset-btn{font-size:.95rem;color:var(--text-l);background:none;border:none;cursor:pointer;text-decoration:underline;padding:8px}
 .reset-btn:hover{color:var(--danger)}
 
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:999}
-.loading{text-align:center;padding:80px 0;font-family:var(--f-hud);color:var(--primary);text-transform:uppercase;letter-spacing:.3em;animation:blink 1.2s infinite}
+.loading{text-align:center;padding:80px 0;font-family:var(--px);font-size:.7rem;color:var(--text);text-shadow:2px 2px 0 #000;animation:blink 1s steps(2) infinite}
 
-@media(max-width:360px){.stat-value{font-size:1.1rem}.rank-val{font-size:.9rem}.pin-pad{grid-template-columns:repeat(3,68px)}.pin-key{width:68px}}
+@media(max-width:360px){.stat-value{font-size:.8rem}.rank-val{font-size:.5rem}.pin-pad{grid-template-columns:repeat(3,68px)}.pin-key{width:68px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -1331,7 +1278,7 @@ function fireConfetti() {
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  const colors = ['#00e5ff','#8b5cf6','#39ff88','#ffb020','#ff3b6b','#ffffff'];
+  const colors = ['#5dbb3a','#8fe05f','#f5c542','#4fe3d6','#e04848','#8a6a1e'];
   const pieces = Array.from({length:80}, () => ({
     x: canvas.width*.5 + (Math.random()-.5)*200,
     y: canvas.height*.4,
