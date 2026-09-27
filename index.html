@@ -655,7 +655,7 @@ const BLOCKS_FULL = [
     tasks: [
       { id: 'n1', name: 'Jantar', emoji: '🍽️', xp: 5 },
       { id: 'n2', name: 'Escovar os dentes (após jantar)', emoji: '🪥', xp: 10 },
-      { id: 'n3', name: 'Arrumar material, uniforme e merenda', emoji: '🎒', xp: 15, weekdayOnly: true },
+      { id: 'n3', name: 'Arrumar material, uniforme e merenda', emoji: '🎒', xp: 15, schoolEveOnly: true },
       { id: 'n4', name: 'Tomar banho', emoji: '🛁', xp: 10 },
       { id: 'n5', name: 'Escovar os dentes (antes de dormir)', emoji: '🪥', xp: 10 },
     ]
@@ -671,6 +671,13 @@ const RANKS = [
   { min: 60, name: 'Lenda', icon: '👑' },
 ];
 
+// Véspera de dia de aula: domingo a quinta (amanhã é seg–sex)
+function isSchoolEve(dateStr) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const day = new Date(y, m - 1, d).getDay();
+  return day >= 0 && day <= 4;
+}
+
 function isWeekend(dateStr) {
   const [y, m, d] = dateStr.split('-').map(Number);
   const day = new Date(y, m - 1, d).getDay();
@@ -681,7 +688,9 @@ function getBlocksForDate(dateStr) {
   const weekend = isWeekend(dateStr);
   return BLOCKS_FULL.map(block => ({
     ...block,
-    tasks: block.tasks.filter(t => !t.weekdayOnly || !weekend)
+    tasks: block.tasks.filter(t =>
+      (!t.weekdayOnly || !weekend) &&
+      (!t.schoolEveOnly || isSchoolEve(dateStr)))
   })).filter(block => block.tasks.length > 0);
 }
 
